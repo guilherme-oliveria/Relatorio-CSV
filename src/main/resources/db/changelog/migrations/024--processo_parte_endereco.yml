@@ -1,0 +1,56 @@
+databaseChangeLog:
+  - changeSet:
+      id: 24
+      author: Andrew May
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: processo_parte_endereco
+      changes:
+        - createTable:
+            tableName: processo_parte_endereco
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_processo_parte_endereco
+              - column:
+                  name: id_endereco_legado
+                  type: BIGINT
+              - column:
+                  name: id_processo_parte_legado
+                  type: BIGINT
+              - column:
+                  name: id_endereco
+                  type: BIGINT
+              - column:
+                  name: id_processo_parte
+                  type: BIGINT
+        - addForeignKeyConstraint:
+            baseColumnNames: id_endereco
+            baseTableName: processo_parte_endereco
+            constraintName: fk_proc_parte_endereco_end
+            deferreable: true
+            initiallyDeferred: true
+            onDelete: No Action
+            onUpdate: No Action
+            referencedColumnNames: id
+            referencedTableName: endereco
+        - addForeignKeyConstraint:
+            baseColumnNames: id_processo_parte
+            baseTableName: processo_parte_endereco
+            constraintName: fk_proc_parte_endereco_pro_par
+            deferreable: true
+            initiallyDeferred: true
+            onDelete: No Action
+            onUpdate: No Action
+            referencedColumnNames: id
+            referencedTableName: processo_parte
+
+
+
+

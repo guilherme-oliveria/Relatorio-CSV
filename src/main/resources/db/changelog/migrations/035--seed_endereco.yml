@@ -1,0 +1,39 @@
+databaseChangeLog:
+  - changeSet:
+      id: 35
+      context: developer
+      author: Jônatas
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: SELECT COUNT(*) FROM endereco
+      changes:
+        - loadData:
+            catalogName: endereco-seed
+            columns:
+              - column:
+                  name: id
+                  type: numeric
+              - column:
+                  name: id_endereco_legado
+                  type: numeric
+              - column:
+                  name: logradouro
+                  type: string
+              - column:
+                  name: numero
+                  type: string
+              - column:
+                  name: complemento
+                  type: string
+              - column:
+                  name: bairro
+                  type: string
+              - column:
+                  name: id_cep
+                  type: numeric
+            encoding: UTF-8
+            file: ./db/changelog/seeds/csv/endereco.csv
+            schemaName: public
+            tableName: endereco

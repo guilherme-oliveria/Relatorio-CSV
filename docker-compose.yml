@@ -1,0 +1,17 @@
+version: '2'
+services:
+  web:
+    build: .
+    ports:
+      - '8080:8080'
+    volumes:
+      - src/main/resources/application-test.properties:/application.properties
+  postgres:
+    image: postgres:11
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=windson
+#      - /etc/localtime:/etc/localtime:ro
+#    environment:
+#    - "JAVA_OPTS=-Duser.timezone=GMT -Duser.timezone=GMT"

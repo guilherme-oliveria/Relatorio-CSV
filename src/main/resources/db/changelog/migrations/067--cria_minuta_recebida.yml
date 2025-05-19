@@ -1,0 +1,70 @@
+databaseChangeLog:
+  - include:
+      file: ./db/changelog/types.yml
+  - changeSet:
+      id: 67
+      author: Guilherme oliveira
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - sequenceExists:
+                sequenceName: SEQ_MINUTA_RECEBIDA
+      changes:
+        - sql:
+            dbms: postgresql
+            sql: CREATE SCHEMA MODULOGABINETE;
+        - createSequence:
+            incrementBy: 1
+            minValue: 1
+            sequenceName: SEQ_MINUTA_RECEBIDA
+            startValue: 1
+        - createTable:
+            tableName: MINUTA_RECEBIDA
+            schemaName: MODULOGABINETE
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                  defaultValue:
+                    defaultNumericValue:
+                      sequenceName: SEQ_MINUTA_RECEBIDA
+              - column:
+                  name: SISTEMA
+                  type: VARCHAR(255)
+              - column:
+                  name: id_movimento
+                  type: BIGINT
+              - column:
+                  name: html
+                  type: CLOB
+              - column:
+                  name: sistema_origin
+                  type: VARCHAR(255)
+              - column:
+                  name: ref_origem
+                  type: VARCHAR(255)
+              - column:
+                  name: nome_autor
+                  type: VARCHAR(255)
+              - column:
+                  name: data_criacao
+                  type: TIMESTAMP
+              - column:
+                  name: status
+                  type: VARCHAR(255)
+              - column:
+                  name: id_processo
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: false
+                    unique: false
+                    primaryKeyName: null
+                    foreignKeyName: FK_MINUTA_PROCESSO
+                    referencedTableName: PROCESSO
+                    referencedColumnNames: id
+                    onDelete: No Action
+                    onUpdate: No Action

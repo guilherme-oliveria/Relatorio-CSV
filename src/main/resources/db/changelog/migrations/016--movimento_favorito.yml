@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: 16
+      author: Jônatas
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: MOVIMENTO_FAVORITO
+      changes:
+        - createTable:
+            tableName: MOVIMENTO_FAVORITO
+            columns:
+              - column:
+                  name: login_usuario
+                  type: varchar(255)
+              - column:
+                  name: id_movimento
+                  type: bigint
+        - addUniqueConstraint:
+            columnNames: id_movimento, login_usuario
+            constraintName: UK_ID_MOVIMENTO_LOGIN_USUARIO
+            deferrable: true
+            disabled: true
+            initiallyDeferred: true
+            tableName: MOVIMENTO_FAVORITO

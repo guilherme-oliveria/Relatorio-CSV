@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - include:
+      file: ./db/changelog/types.yml
+  - changeSet:
+      id: 8
+      author: Andrew May
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - columnExists:
+                tableName: LOC_ORGAO_JULGADOR
+                columnName: id_str
+      changes:
+        - addColumn:
+            tableName: LOC_ORGAO_JULGADOR
+            columns:
+              - column:
+                  name: id_str
+                  type: varchar(255)

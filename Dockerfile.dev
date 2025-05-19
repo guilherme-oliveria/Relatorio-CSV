@@ -1,0 +1,11 @@
+FROM openjdk:19
+
+WORKDIR /app
+
+COPY . .
+
+COPY src/main/resources/application.properties.dev src/main/resources/application.properties
+
+EXPOSE 8080
+
+CMD ["./gradlew", "bootRun"]

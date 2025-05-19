@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: 51
+      author: Andrew May
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - sequenceExists:
+                sequenceName: seq_proc_parte_endereco
+      changes:
+        - createSequence:
+            incrementBy: 1
+            minValue: 1
+            sequenceName: seq_proc_parte_endereco
+            startValue: 2080

@@ -1,0 +1,157 @@
+server.port=8080
+
+scheduled.main=false
+scheduled.busca.processos.conclusos=true
+scheduled.devolve.origem=true
+#Intervalo em milisegundos
+scheduled.sincronizar.processos=60000
+#Intervalo em minutos
+scheduled.intervalo.sincronizacao=-60
+
+#Dev
+spring.datasource.url=jdbc:postgresql://10.0.60.51:9023/meugabinete?useSSL=false
+spring.datasource.username=postgres
+spring.datasource.password=postgres
+
+#SUP
+#spring.datasource.url=jdbc:postgresql://10.0.60.17:5432/meugabinete_sup?useSSL=false
+#spring.datasource.username=meugabinete
+#spring.datasource.password=m3ugabin3te-4dm1n
+
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.datasource.platform=postgres
+spring.datasource.connectionProperties=useUnicode=true;characterEncoding=utf-8;
+
+#Back
+GABINETE_HOST=
+
+#ProxyPJE
+URL_PJE_PG_REST=http://pjetst-1.intra.tjmg.gov.br:9135/
+#URL_PJE_PG_REST=http://proxy-pje.apps.ocp-hml.intra.tjmg.gov.br
+URL_PJE_SG_REST=
+
+#OrgaoJulgador
+lotacoes.url=http://pjetst-1.intra.tjmg.gov.br:9021
+#lotacoes.url=http://orgao-julgador.apps.ocp-hml.intra.tjmg.gov.br
+spring.messages.encoding=UTF-8
+server.tomcat.uri-encoding=UTF-8
+spring.http.encoding.charset=UTF-8
+spring.http.encoding.enabled=true
+spring.http.encoding.force=true
+
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.generate-ddl=false
+spring.jpa.show-sql=false
+spring.jpa.database=default
+spring.jpa.hibernate.ddl-auto=none
+
+spring.liquibase.enabled=false
+spring.datasource.initialize=true
+spring.liquibase.contexts=developer
+
+modo.autenticacao=keycloak
+
+#Configura??o para o keycloak
+keycloak.realm=pje
+keycloak.auth-server-url=http://pjetst-1.intra.tjmg.gov.br:8585/auth/realms/pje/protocol/openid-connect/token
+keycloak.client-id=pje-tjmg-1g
+keycloak.client-secret=oNT3qcWC7D6UuTpi2jQpB6rwxNMUUOCT
+keycloak.redirect-uri=http://pjetst-1.intra.tjmg.gov.br:9140/login-keycloak
+keycloak.auth-server-url-logout=http://pjetst-1.intra.tjmg.gov.br:8585/auth/realms/pje/protocol/openid-connect/logout
+keycloak.url-jwt=http://pjetst-1.intra.tjmg.gov.br:8585/auth/realms/pje
+
+spring.security.oauth2.resourceserver.jwt.jwk-set-uri=http://pjetst-1.intra.tjmg.gov.br:8585/auth/realms/pje/protocol/openid-connect/certs
+
+# Max file size.
+spring.servlet.multipart.max-file-size=10MB
+# Max request size.
+spring.servlet.multipart.max-request-size=20MB
+
+logging.level.org.hibernate.SQL=DEBUG
+logging.level.org.hibernate.type.descriptor.sql.BasicBinder=TRACE
+
+Access-Control-Allow-Credentials:true
+
+IA_ATIVADO=false
+IA_HOST=http://tjrov-docker.tjro.net:8186/rest
+IA_TIPO_CLASSIFICADOR=CLS_TIPO_MOVIMENTO_MAGISTRADO
+IA_QTD_RAMIFICACOES=2
+IA_QTD_PALAVRAS=4
+
+KAFKA_HOST=http://10.0.60.51:9094
+KAFKA_ENABLE_RUNNER=true
+
+kafka.devolve.consumer=true
+
+TGM_CODEX_ATIVADO=false
+
+management.security.enabled=true
+
+spring.zipkin.service.name=${TJRO_APPTAG:gabinete-back}
+spring.zipkin.sender.type=web
+spring.zipkin.baseUrl=http://zipkin:9411
+spring.sleuth.sampler.percentage=0.0
+
+URL_MICROSERVICE_METAS = http://localhost:4001
+
+spring.cloud.stream.kafka.binder.brokers=${KAFKA_HOST:172.24.1.3:9092}
+eureka.client.enabled=false
+
+integracao.caixa.url=https://integracaocaixa.tjro.jus.br
+
+# Modelos de Documentos
+MODELO_DOCUMENTO_HOST=http://localhost:8091
+TAG_VALIDA_EXPEDIENTE_CARTORIO:Validar Expediente Cart?rio|#8800df
+CAIXA_VALIDA_EXPEDIENTE_CARTORIO:Validar Expediente Cart?rio
+
+modelodocumento.back.host=http://pjetst-1.intra.tjmg.gov.br:9027
+modelodocumento.front.host=http://pjetst-1.intra.tjmg.gov.br:9028
+
+
+recursos.json=\
+  {\
+  "administrador":["Administrador(a)","Assistente de Cadastro"],\
+  "magistrado":["magistrado(a)","Administrador(a)","Escriv?o(?) Judicial","Usu?rio Justi?a Restaurativa"],\
+  "assessor":["Diretor de Secretaria","Assessor","Estagi?rio(a) Gabinete","Assistente de Apoio","Servidor(a) Retificador(a) Gabinete","Escriv?o(?) do Ju?zo","Escriv?o(?) Judicial","Servidor(a) Plantonista"]\
+  }
+
+conta.centralizadora=\
+  {\
+   "banco": "104",\
+   "agencia": "2848",\
+   "operacao": "040.1",\
+   "numeroConta": "01529904",\
+   "digitoVerificador": "5",\
+   "numeroProcesso":"00759114820108221111",\
+   "idLegado":76605\
+  }
+
+tribunal=tjmg
+nexus=http://nexus.intra.tjmg.gov.br/repository/public
+
+URL_TPU=http://pjetst-1.intra.tjmg.gov.br:9033/api/v1
+
+localizadores.url=http://pjetst-1.intra.tjmg.gov.br:9036
+#localizadores.url=http://localizador.apps.ocp-hml.intra.tjmg.gov.br
+
+#dev
+STORAGE_URL=http://pjetst-1.intra.tjmg.gov.br:9001/storage/documents
+#SUP
+#STORAGE_URL=http://pje-binarios.apps.ocp4-hml.intra.tjmg.gov.br/jcr-storage-server/documents
+
+STORAGE_TYPE=jcr
+STORAGE_USER=admin
+STORAGE_SENHA=admin
+
+assinatura.digital.validar=false
+
+
+URL_CORS=http://pjetst-1.intra.tjmg.gov.br:[*],http://pjetst-1.intra.tjmg.gov.br:9140/*,http://*localhost:[*],http://localhost:4200/,http://localhost:4200,http://192.168.15.42:4200,http://192.168.15.42:4200/
+
+verifica.tarefas.concluso=false
+tarefas.concluso=Enviado para Meu Gabinete
+scheduled.devolveParaIntegracaoAutomatico=true
+
+management.endpoints.web.exposure.include=health
+
+url.api.assinador.mobile=http://assinador-a1.apps.ocp4-hml.intra.tjmg.gov.br/assinador-a1/api/v1/assinar/

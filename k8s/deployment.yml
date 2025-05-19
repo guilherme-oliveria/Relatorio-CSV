@@ -1,0 +1,99 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: #TJRO_APPTAG
+  name: #TJRO_APPTAG
+  namespace: #NAME_SPACE
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: #TJRO_APPTAG
+  template:
+    metadata:
+      labels:
+        app: #TJRO_APPTAG
+    spec:
+      containers:
+        - name: #TJRO_APPTAG
+          image: #CONTAINER_IMG
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: TJRO_APPNAME
+              value: gabinete
+            - name: TJRO_APPTAG
+              value: #TJRO_APPTAG
+            - name: TJRO_ENV
+              value: #TJRO_ENV
+            - name: TZ
+              value: America/Porto_Velho
+            - name: ELASTIC_APM_SERVER_URL
+              value: 'https://apm.tjro.jus.br'
+            - name: ELASTIC_APM_ENABLED
+              value: true
+            - name: ELASTIC_APM_ENVIRONMENT
+              value: #TJRO_ENV
+            - name: ELASTIC_APM_SERVICE_NAME
+              value: gabinete-back
+            - name: JAVA_OPTS_APPEND
+              value: '-Duser.timezone=America/Porto_Velho -Duser.region=BR -Duser.language=pt'
+            - name: spring.application.name
+              value: gabinete:${HOSTNAME}
+            - name: redis_password
+              valueFrom:
+                secretKeyRef:
+                  key: database-password
+                  name: redis
+          volumeMounts:
+            - name: application-properties
+              mountPath: /application.properties
+              subPath: application.properties
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /version
+              port: 8080
+            initialDelaySeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 10
+            periodSeconds: 30
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /version
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 1
+            periodSeconds: 30
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "600m"
+            limits:
+              memory: "4Gi"
+              cpu: "1000m"  
+      volumes:
+        - name: application-properties
+          configMap:
+            name: #TJRO_APPTAG
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: #TJRO_APPTAG
+  namespace: #NAME_SPACE
+spec:
+  selector:
+    app: #TJRO_APPTAG
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

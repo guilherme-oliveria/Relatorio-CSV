@@ -1,0 +1,135 @@
+databaseChangeLog:
+  - include:
+      file: ./db/changelog/types.yml
+  - changeSet:
+      id: 61
+      author: Guilherme Oliveira
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: PROCESSO_PARTE_EXPEDIENTE
+      changes:
+        - addColumn:
+            tableName: PROCESSO_PARTE_EXPEDIENTE
+            columns:
+              - column:
+                  name: id_legado
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: qt_prazo_legal_parte
+                  type: INTEGER
+                  constraints:
+                    nullable: true
+              - column:
+                  name: qt_prazo_processual_parte
+                  type: INTEGER
+                  constraints:
+                    nullable: true
+              - column:
+                  name: dt_prazo_legal_parte
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: true
+              - column:
+                  name: dt_prazo_processual_parte
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: true
+              - column:
+                  name: dt_ciencia_parte
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: true
+              - column:
+                  name: ciencia_sistema
+                  type: BOOLEAN
+                  constraints:
+                    nullable: true
+              - column:
+                  name: pendente_manifestacao
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tipo_prazo
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: pendencia
+                  type: VARCHAR(200)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: fechado
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+              - column:
+                  name: recibo_dje
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: id_procuradoria
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    primaryKey: false
+                    unique: false
+                    primaryKeyName: null
+                    foreignKeyName: FK_PROC_PARTE_EXP_PROCURADORIA
+                    referencedTableName: PROCURADORIA
+                    referencedColumnNames: id
+                    onDelete: No Action
+                    onUpdate: No Action
+                  remarks: null
+                  defaultValue: null
+              - column:
+                  name: id_pessoa_parte
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    primaryKey: false
+                    unique: false
+                    primaryKeyName: null
+                    foreignKeyName: FK_PROC_PARTE_EXP_PESS_PARTE
+                    referencedTableName: pessoa
+                    referencedColumnNames: id
+                    onDelete: No Action
+                    onUpdate: No Action
+                  remarks: null
+                  defaultValue: null
+              - column:
+                  name: id_pessoa_ciencia
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    primaryKey: false
+                    unique: false
+                    primaryKeyName: null
+                    foreignKeyName: FK_PROC_PARTE_EXP_PESS_CIENCIA
+                    referencedTableName: pessoa
+                    referencedColumnNames: id
+                    onDelete: No Action
+                    onUpdate: No Action
+                  remarks: null
+                  defaultValue: null
+              - column:
+                  name: tipo_calc_meio_comunicacao
+                  type: VARCHAR(3)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: intima_pessoal
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+              - column:
+                  name: destaque
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false

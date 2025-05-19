@@ -1,0 +1,171 @@
+databaseChangeLog:
+  - include:
+      file: ./db/changelog/types.yml
+  - changeSet:
+      id: 8
+      author: Andrew May
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: LOC_USUARIO
+      changes:
+        - createTable:
+            tableName: LOC_USUARIO
+            columns:
+              - column:
+                  name: id
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_loc_usuario
+        - createTable:
+            tableName: LOC_ORGAO_JULGADOR
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_loc_orgao_julgador
+        - createTable:
+            tableName: LOC_REGRA
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_loc_regra
+              - column:
+                  name: PARAMETRO
+                  type: ${json}
+        - createSequence:
+            incrementBy: 1
+            minValue: 1
+            sequenceName: SEQUENCIA_LOC_REGRA
+            startValue: 1
+        - createTable:
+            tableName: LOC_CAIXA
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_loc_caixa
+              - column:
+                  name: nome
+                  type: varchar(255)
+              - column:
+                  name: LOCALIZADORCAIXA_ID
+                  type: BIGINT
+              - column:
+                  name: regra_id
+                  type: BIGINT
+              - column:
+                  name: exclusivo
+                  type: boolean
+              - column:
+                  name: tipo
+                  type: varchar(255)
+        - addForeignKeyConstraint:
+            baseColumnNames: regra_id
+            baseTableName: LOC_CAIXA
+            constraintName: FK_LOC_CAIXA_LOC_REGRA
+            deferreable: true
+            initiallyDeferred: true
+            onDelete: No Action
+            onUpdate: No Action
+            referencedColumnNames: id
+            referencedTableName: LOC_REGRA
+        - createSequence:
+            incrementBy: 1
+            minValue: 1
+            sequenceName: sequencia_localizador_caixa
+            startValue: 1
+
+        - createTable:
+            tableName: LOC_CAIXA_LOC_ORGAO_JULGADOR
+            columns:
+              - column:
+                  name: LOCALIZADORCAIXA_ID
+                  type: BIGINT
+              - column:
+                  name: ORGAOS_JULGADORES_ID_STR
+                  type: varchar(255)
+        - addNotNullConstraint:
+            columnDataType: BIGINT
+            columnName: LOCALIZADORCAIXA_ID
+            tableName: LOC_CAIXA_LOC_ORGAO_JULGADOR
+        - addNotNullConstraint:
+            columnDataType: varchar(255)
+            columnName: ORGAOS_JULGADORES_ID_STR
+            tableName: LOC_CAIXA_LOC_ORGAO_JULGADOR
+
+
+        - createTable:
+            tableName: LOC_CAIXA_LOC_USUARIO
+            columns:
+              - column:
+                  name: LOCALIZADOR_CAIXA_ID
+                  type: BIGINT
+              - column:
+                  name: USUARIOS_ID
+                  type: varchar(255)
+        - addNotNullConstraint:
+            columnDataType: BIGINT
+            columnName: LOCALIZADOR_CAIXA_ID
+            tableName: LOC_CAIXA_LOC_USUARIO
+        - addNotNullConstraint:
+            columnDataType: BIGINT
+            columnName: USUARIOS_ID
+            tableName: LOC_CAIXA_LOC_USUARIO
+
+
+        - createTable:
+            tableName: LOCALIZADOR_PROCESSO_CAIXA
+            columns:
+              - column:
+                  name: PROCESSO_ID
+                  type: BIGINT
+              - column:
+                  name: LOCALIZADORCAIXA_ID
+                  type: BIGINT
+        - addNotNullConstraint:
+            columnDataType: BIGINT
+            columnName: PROCESSO_ID
+            tableName: LOCALIZADOR_PROCESSO_CAIXA
+        - addNotNullConstraint:
+            columnDataType: BIGINT
+            columnName: LOCALIZADORCAIXA_ID
+            tableName: LOCALIZADOR_PROCESSO_CAIXA
+        - addPrimaryKey:
+            columnNames: PROCESSO_ID, LOCALIZADORCAIXA_ID
+            constraintName: PK_LOCALIZADOR_PROC_CAIXA
+            tableName: LOCALIZADOR_PROCESSO_CAIXA
+        - addForeignKeyConstraint:
+            baseColumnNames: PROCESSO_ID
+            baseTableName: LOCALIZADOR_PROCESSO_CAIXA
+            constraintName: FK_LOCAL_PROC_CAIXA_PROCESSO
+            deferreable: true
+            initiallyDeferred: true
+            onDelete: No Action
+            onUpdate: No Action
+            referencedColumnNames: id
+            referencedTableName: processo
+        - addForeignKeyConstraint:
+            baseColumnNames: LOCALIZADORCAIXA_ID
+            baseTableName: LOCALIZADOR_PROCESSO_CAIXA
+            constraintName: FK_LOCAL_PROC_CAIXA_LOC_CAIXA
+            deferreable: true
+            initiallyDeferred: true
+            onDelete: No Action
+            onUpdate: No Action
+            referencedColumnNames: id
+            referencedTableName: LOC_REGRA
+

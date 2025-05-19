@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - include:
+      file: ./db/changelog/types.yml
+  - changeSet:
+      id: 76
+      author: Guilherme Oliveira
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - columnExists:
+                tableName: MINUTA
+                columnName: tipos_documentos
+      changes:
+        - addColumn:
+            tableName: MINUTA
+            columns:
+              - column:
+                  name: tipos_documentos
+                  type: VARCHAR(1000)
+                  constraints:
+                    nullable: true

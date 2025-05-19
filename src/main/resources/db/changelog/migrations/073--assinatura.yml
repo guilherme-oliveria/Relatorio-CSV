@@ -1,0 +1,57 @@
+databaseChangeLog:
+  - include:
+      file: ./db/changelog/types.yml
+  - changeSet:
+      id: 73
+      author: Guilherme oliveira
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: ASSINATURA
+      changes:
+        - createSequence:
+            sequenceName: SEQUENCIA_ASSINATURA
+            startValue: 1
+            incrementBy: 1
+        - createTable:
+            tableName: ASSINATURA
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: id_cadeia_certificado
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: false
+                    unique: false
+                    primaryKeyName: null
+                    foreignKeyName: FK_ASSINATURA_CERTIFICADO
+                    referencedTableName: CADEIA_CERTIFICADO
+                    referencedColumnNames: id
+                    onDelete: No Action
+                    onUpdate: No Action
+              - column:
+                  name: assinatura
+                  type: CLOB
+                  constraints:
+                    nullable: false
+              - column:
+                  name: algoritmo_digest
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cpf_usuario
+                  type: VARCHAR(14)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: data_assinatura
+                  type: java.sql.Types.TIMESTAMP
+                  constraints:
+                    nullable: false

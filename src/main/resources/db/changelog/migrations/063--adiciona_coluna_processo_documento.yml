@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - include:
+      file: ./db/changelog/types.yml
+  - changeSet:
+      id: 63
+      author: Guilherme Oliveira
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - columnExists:
+                tableName: processo_documento
+                columnName: NOMEUSERASSINATURA
+      changes:
+        - addColumn:
+            tableName: processo_documento
+            columns:
+              - column:
+                  name: NOMEUSERASSINATURA
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true

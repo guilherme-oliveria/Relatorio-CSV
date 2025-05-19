@@ -1,0 +1,71 @@
+databaseChangeLog:
+  - changeSet:
+      id: 12
+      author: Jônatas
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: MINUTA_ANEXO
+      changes:
+        - createTable:
+            tableName: MINUTA_ANEXO
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_minuta_anexo
+              - column:
+                  name: hash
+                  type: varchar(255)
+              - column:
+                  name: hash_p7s
+                  type: varchar(255)
+              - column:
+                  name: descricao
+                  type: varchar(255)
+              - column:
+                  name: id_minuta
+                  type: BIGINT
+              - column:
+                  name: tipo_documento
+                  type: varchar(255)
+              - column:
+                  name: content_type
+                  type: varchar(255)
+              - column:
+                  name: sigilo
+                  type: boolean
+              - column:
+                  name: id_minuta_sistema_legado
+                  type: varchar(20)
+              - column:
+                  name: posicao
+                  type: INTEGER
+              - column:
+                  name: html
+                  type: clob
+              - column:
+                  name: prejudica_merito
+                  type: boolean
+              - column:
+                  name: tipo_voto
+                  type: varchar(20)
+        - createSequence:
+            incrementBy: 1
+            minValue: 1
+            sequenceName: SEQUENCIA_MINUTA_ANEXO
+            startValue: 1
+        - addForeignKeyConstraint:
+            baseColumnNames: id_minuta
+            baseTableName: MINUTA_ANEXO
+            constraintName: FK_MINUTA_ANEXO_MINUTA
+            deferreable: true
+            initiallyDeferred: true
+            onDelete: No Action
+            onUpdate: No Action
+            referencedColumnNames: id
+            referencedTableName: MINUTA

@@ -1,0 +1,6 @@
+---
+
+databaseChangeLog:
+  - property:
+      name: schema
+      value: migrationGabinete

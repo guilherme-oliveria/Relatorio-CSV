@@ -1,0 +1,87 @@
+databaseChangeLog:
+  - changeSet:
+      id: 12
+      author: Jônatas
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: MINUTA_MOVIMENTO
+      changes:
+        - createTable:
+            tableName: MINUTA_MOVIMENTO
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_minuta_movimento
+              - column:
+                  name: minuta_id
+                  type: BIGINT
+              - column:
+                  name: movimento_id
+                  type: BIGINT
+              - column:
+                  name: ordem
+                  type: INTEGER
+        - createSequence:
+            incrementBy: 1
+            minValue: 1
+            sequenceName: SEQUENCIA_MINUTA_MOVIMENTO
+            startValue: 1
+        - addForeignKeyConstraint:
+            baseColumnNames: minuta_id
+            baseTableName: MINUTA_MOVIMENTO
+            constraintName: FK_MINUTA_MOVIMENTO_MINUTA
+            deferreable: true
+            initiallyDeferred: true
+            onDelete: No Action
+            onUpdate: No Action
+            referencedColumnNames: id
+            referencedTableName: MINUTA
+        - createTable:
+            tableName: MINUTA_MOV_COMPLEMENTO
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_minuta_mov_complemento
+              - column:
+                  name: complemento_id
+                  type: BIGINT
+              - column:
+                  name: minuta_movimento_id
+                  type: BIGINT
+              - column:
+                  name: ordem
+                  type: INTEGER
+              - column:
+                  name: valor
+                  type: varchar(255)
+              - column:
+                  name: tipo_complemento
+                  type: varchar(255)
+              - column:
+                  name: descricao
+                  type: varchar(255)
+        - createSequence:
+            incrementBy: 1
+            minValue: 1
+            sequenceName: SEQ_MINUTA_MOV_COMPLEMENTO
+            startValue: 1
+        - addForeignKeyConstraint:
+            baseColumnNames: minuta_movimento_id
+            baseTableName: MINUTA_MOV_COMPLEMENTO
+            constraintName: FK_MINUTA_MOV_COMPLEM_MIN_MOV
+            deferreable: true
+            initiallyDeferred: true
+            onDelete: No Action
+            onUpdate: No Action
+            referencedColumnNames: id
+            referencedTableName: MINUTA_MOVIMENTO

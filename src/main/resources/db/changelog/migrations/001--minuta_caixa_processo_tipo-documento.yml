@@ -1,0 +1,170 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Andrew May
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: caixa
+      changes:
+        - createTable:
+            tableName: caixa
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_caixa
+              - column:
+                  name: nome
+                  type: varchar(255)
+        - createTable:
+            tableName: processo
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_processo
+              - column:
+                  name: assunto_principal
+                  type: varchar(255)
+              - column:
+                  name: data_entrada
+                  type: datetime
+              - column:
+                  name: dt_distribuicao
+                  type: date
+              - column:
+                  name: classe_judicial
+                  type: int
+              - column:
+                  name: id_processo_sistema_legado
+                  type: int
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: uk_processo_sistema_leg_sist
+                    deferrable: true
+                    initiallyDeferred: true
+              - column:
+                  name: instancia
+                  type: int
+              - column:
+                  name: justica_gratuita
+                  type: boolean
+              - column:
+                  name: numero_processo
+                  type: varchar(255)
+              - column:
+                  name: orgao_julgador_str
+                  type: varchar(255)
+              - column:
+                  name: possui_liminar
+                  type: boolean
+              - column:
+                  name: prioridade
+                  type: boolean
+              - column:
+                  name: segredo_justica
+                  type: boolean
+              - column:
+                  name: sistema
+                  type: varchar(255)
+              - column:
+                  name: tarefaenum
+                  type: varchar(255)
+              - column:
+                  name: vl_causa
+                  type: float
+              - column:
+                  name: id_caixa
+                  type: int
+              - column:
+                  name: data_sincronizacao
+                  type: datetime
+              - column:
+                  name: erro_sincronizacao
+                  type: int
+              - column:
+                  name: motivo_segredo_justica
+                  type: varchar(255)
+              - column:
+                  name: data_exlusao
+                  type: java.sql.Types.TIMESTAMP
+        - addForeignKeyConstraint:
+            baseColumnNames: id_caixa
+            baseTableName: processo
+            constraintName: fk_processo_caixa
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: No ACTION
+            onUpdate: No ACTION
+            referencedColumnNames: id
+            referencedTableName: caixa
+        - createTable:
+            tableName: minuta
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_minuta
+              - column:
+                  name: eh_sigiloso
+                  type: boolean
+              - column:
+                  name: em_fase_finalizacao
+                  type: boolean
+              - column:
+                  name: ha_anexos
+                  type: boolean
+              - column:
+                  name: ha_outras_comunicacoes
+                  type: boolean
+              - column:
+                  name: covid
+                  type: boolean
+                  defaultValueBoolean: false
+              - column:
+                  name: hash_p7s
+                  type: VARCHAR(255)
+              - column:
+                  name: id_minuta_sistema_legado
+                  type: VARCHAR(255)
+              - column:
+                  name: minuta_html
+                  type: clob
+              - column:
+                  name: minuta_html_renderizado
+                  type: clob
+              - column:
+                  name: questions
+                  type: clob
+              - column:
+                  name: versao
+                  type: int
+              - column:
+                  name: id_processo
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: id_tipo_documento
+                  type: VARCHAR(255)
+        - addForeignKeyConstraint:
+            baseColumnNames: id_processo
+            baseTableName: minuta
+            constraintName: fk_minuta_processo
+            deferreable: true
+            initiallyDeferred: true
+            onDelete: No Action
+            onUpdate: No Action
+            referencedColumnNames: id
+            referencedTableName: processo

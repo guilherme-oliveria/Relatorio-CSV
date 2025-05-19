@@ -1,0 +1,76 @@
+databaseChangeLog:
+  - include:
+      file: ./db/changelog/types.yml
+  - changeSet:
+      id: 62
+      author: Guilherme Oliveira
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - columnExists:
+                tableName: PROCESSO_EXPEDIENTE
+                columnName: documento_existente
+      changes:
+        - renameColumn:
+            tableName: PROCESSO_EXPEDIENTE
+            oldColumnName: documentoexistente
+            newColumnName: documento_existente
+            columnDataType: BOOLEAN
+        - renameColumn:
+            tableName: PROCESSO_EXPEDIENTE
+            oldColumnName: idlegado
+            newColumnName: id_legado
+            columnDataType: BIGINT
+        - renameColumn:
+            tableName: PROCESSO_EXPEDIENTE
+            oldColumnName: dtexclusao
+            newColumnName: dt_exclusao
+            columnDataType: java.sql.Types.TIMESTAMP
+        - renameColumn:
+            tableName: PROCESSO_EXPEDIENTE
+            oldColumnName: dtcriacao
+            newColumnName: dt_criacao_expediente
+            columnDataType: java.sql.Types.TIMESTAMP
+        - renameColumn:
+            tableName: PROCESSO_EXPEDIENTE
+            oldColumnName: meioexpediente
+            newColumnName: meio_expediente
+            columnDataType: varchar(255)
+        - addColumn:
+            tableName: PROCESSO_EXPEDIENTE
+            columns:
+              - column:
+                  name: temporario
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+              - column:
+                  name: id_processo_doc_vinculado
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    primaryKey: false
+                    unique: false
+                    primaryKeyName: null
+                    foreignKeyName: FK_PROCESSO_EXP_DOC_VINCULADO
+                    referencedTableName: processo_documento
+                    referencedColumnNames: id
+                    onDelete: No Action
+                    onUpdate: No Action
+                  remarks: null
+                  defaultValue: null
+              - column:
+                  name: id_processo_documento
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    primaryKey: false
+                    unique: false
+                    primaryKeyName: null
+                    foreignKeyName: FK_PROC_EXP_PROCESSO_DOCUMENTO
+                    referencedTableName: processo_documento
+                    referencedColumnNames: id
+                    onDelete: No Action
+                    onUpdate: No Action
+                  remarks: null
+                  defaultValue: null

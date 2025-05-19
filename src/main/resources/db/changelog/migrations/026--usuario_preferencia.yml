@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: 23
+      author: Jônatas
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: USUARIO_PREFERENCIA
+      changes:
+        - createTable:
+            tableName: USUARIO_PREFERENCIA
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_usuario_preferencia
+              - column:
+                  name: id_usuario
+                  type: varchar(255)
+              - column:
+                  name: preferencia
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: valor
+                  type: varchar(100)
+        - createSequence:
+            incrementBy: 1
+            minValue: 1
+            sequenceName: SEQUENCIA_USUARIO_PREFERENCIA
+            startValue: 1

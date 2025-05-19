@@ -1,0 +1,49 @@
+databaseChangeLog:
+  - changeSet:
+      id: 78
+      author: Janderson
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: AVISO
+      changes:
+        - createTable:
+            tableName: AVISO
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_aviso
+              - column:
+                  name: dt_cadastro
+                  type: java.sql.Types.TIMESTAMP
+              - column:
+                  name: dt_ini_visibilidade
+                  type: java.sql.Types.TIMESTAMP
+              - column:
+                  name: dt_fim_visibilidade
+                  type: java.sql.Types.TIMESTAMP
+              - column:
+                  name: cpf_usuario
+                  type: varchar(255)
+              - column:
+                  name: nome_usuario
+                  type: varchar(255)
+              - column:
+                  name: titulo
+                  type: varchar(255)
+              - column:
+                  name: mensagem
+                  type: clob
+              - column:
+                  name: in_ativo
+                  type: boolean
+        - createSequence:
+            incrementBy: 1
+            minValue: 1
+            sequenceName: SEQUENCIA_AVISO
+            startValue: 1

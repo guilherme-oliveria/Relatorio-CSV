@@ -1,0 +1,56 @@
+databaseChangeLog:
+  - changeSet:
+      id: 11
+      author: Jônatas
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: AUTOTEXTO
+      changes:
+        - createTable:
+            tableName: AUTOTEXTO
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_autotexto
+              - column:
+                  name: texto
+                  type: clob
+                  constraints:
+                    nullable: false
+              - column:
+                  name: titulo
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: id_usuario
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: id_orgao_julgador
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: publicidade
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: data_exclusao
+                  type: java.sql.Types.TIMESTAMP
+              - column:
+                  name: id_usuario_exclusao
+                  type: varchar(255)
+        - createSequence:
+            incrementBy: 1
+            minValue: 1
+            sequenceName: SEQUENCIA_AUTOTEXTO
+            startValue: 1

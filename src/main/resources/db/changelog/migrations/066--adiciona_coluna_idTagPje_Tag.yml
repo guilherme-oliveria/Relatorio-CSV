@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - include:
+      file: ./db/changelog/types.yml
+  - changeSet:
+      id: 66
+      author: Guilherme Oliveira
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - columnExists:
+                tableName: TAG
+                columnName: id_tag_pje
+      changes:
+        - addColumn:
+            tableName: TAG
+            columns:
+              - column:
+                  name: id_tag_pje
+                  type: BIGINT
+                  constraints:
+                    nullable: true

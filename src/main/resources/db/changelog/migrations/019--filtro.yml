@@ -1,0 +1,98 @@
+databaseChangeLog:
+  - include:
+      file: ./db/changelog/types.yml
+  - changeSet:
+      id: 19
+      author: Andrew
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: filtro
+      changes:
+        - createTable:
+            tableName: filtro
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_filtro
+              - column:
+                  name: cor
+                  type: varchar(255)
+              - column:
+                  name: nome
+                  type: varchar(255)
+              - column:
+                  name: parametro
+                  type: ${json}
+        - createTable:
+            tableName: filtro_loc_usuario
+            columns:
+              - column:
+                  name: filtro_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: usuarios_id
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: usuarios_id
+            baseTableName: filtro_loc_usuario
+            constraintName: fk_filtro_loc_usuario_loc_usu
+            deferreable: true
+            initiallyDeferred: true
+            onDelete: No Action
+            onUpdate: No Action
+            referencedColumnNames: id
+            referencedTableName: loc_usuario
+        - addForeignKeyConstraint:
+            baseColumnNames: filtro_id
+            baseTableName: filtro_loc_usuario
+            constraintName: fk_fil_usu_prior_proc
+            deferreable: true
+            initiallyDeferred: true
+            onDelete: No Action
+            onUpdate: No Action
+            referencedColumnNames: id
+            referencedTableName: filtro
+        - createTable:
+                  tableName: filtro_loc_orgao_julgador
+                  columns:
+                    - column:
+                        name: filtro_id
+                        type: int
+                        constraints:
+                          nullable: false
+                    - column:
+                        name: orgaosjulgadores_id
+                        type: int
+                        constraints:
+                          nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: filtro_id
+            baseTableName: filtro_loc_orgao_julgador
+            constraintName: fk_filtro_loc_oj_loc_oj
+            deferreable: true
+            initiallyDeferred: true
+            onDelete: No Action
+            onUpdate: No Action
+            referencedColumnNames: id
+            referencedTableName: filtro
+        - addForeignKeyConstraint:
+            baseColumnNames: orgaosjulgadores_id
+            baseTableName: filtro_loc_orgao_julgador
+            constraintName: fk_filt_org_julg_prior_proc
+            deferreable: true
+            initiallyDeferred: true
+            onDelete: No Action
+            onUpdate: No Action
+            referencedColumnNames: id
+            referencedTableName: loc_orgao_julgador
+

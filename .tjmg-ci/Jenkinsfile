@@ -1,0 +1,27 @@
+def configYaml = '''
+build:
+  skipTest: 'true'
+  tipoProjeto: maven
+  package: .tjmg-ci
+  jdk: "'jdk19'"
+  dockerFolder: -f .tjmg-ci/Dockerfile .
+  dockerImage: cojud1a/meu-gabinete/meu-gabinete-back
+'deploy_#branch':
+  okd:
+    helm:
+      clusterName: ocp4_hml
+      projectName: meu-gabinete
+      helmInline: helm template helm-tjmg/common-bootstrap-microservice-tjmg --values .tjmg-ci/Implantacao/helm/values-%s.yaml
+
+'''
+
+def _config = String.format(configYaml, "${params.PROFILE}")
+def _branch = "${params.BRANCH}"
+
+pipelineTjmg {
+    RELEASE = "0.0.15"
+    conf = _config
+    contentType = "yaml"
+    BRANCH = _branch
+    HELM_DIR = ".tjmg-ci/Implantacao/helm/*"
+}

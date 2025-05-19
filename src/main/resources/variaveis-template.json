@@ -1,0 +1,669 @@
+[{
+  "chave": "processo.numero",
+  "grupo": "processo",
+  "descricao": "Número do processo formatado: 7000101-74.2010.8.22.0601 ou sem formatação: 70001017420108220601",
+  "parametros": [{
+    "descricao": "Exibir o número do processo:",
+    "chave": "processo_numero",
+    "opcoes": [
+      {"descricao": "Com formatação", "valor": "formatado", "padrao": true},
+      {"descricao": "Sem formatação", "valor": "nao_formatado", "padrao": false}
+    ]
+  }],
+  "renderizavel": true,
+  "exibirNoFront": true
+}, {
+  "chave": "processo.assuntos",
+  "grupo": "processo",
+  "descricao": "Assunto do processo separados por vírgula",
+  "parametros": [{
+    "descricao": "Separar os assuntos com:",
+    "chave": "lista",
+    "opcoes": [
+      {"descricao": "Vírgula", "valor": "virgula", "padrao": true},
+      {"descricao": "Quebra de linha", "valor": "quebra_de_linha", "padrao": false}
+    ]
+  }],
+  "renderizavel": true,
+  "exibirNoFront": true
+}, {
+  "chave": "processo.classe",
+  "grupo": "processo",
+  "descricao": "Classe do processo",
+  "parametros": [],
+  "renderizavel": true,
+  "exibirNoFront": true
+}, {
+  "chave": "processo.valor",
+  "grupo": "processo",
+  "descricao": "Valor da causa. Ex.: R$ 200,00",
+  "parametros": [{
+    "descricao": "Exibir com a seguinte formatação:",
+    "chave": "dinheiro",
+    "opcoes": [
+      {"descricao": "Padrão, ex.: R$ 200,55", "valor": "padrao", "padrao": true},
+      {"descricao": "Por extenso, ex.: Duzentos e cinquenta reais e cinquenta e cinco centavos", "valor": "extenso", "padrao": false}
+    ]
+  }],
+  "renderizavel": true,
+  "exibirNoFront": true
+}, {
+  "chave": "processo.valor_extenso",
+  "grupo": "processo",
+  "descricao": "Valor da causa por extenso. Ex.: Duzentos reais",
+  "parametros": [{
+    "descricao": "Exibir com a seguinte formatação:",
+    "chave": "dinheiro",
+    "opcoes": [
+      {"descricao": "Padrão, ex.: R$ 200,55", "valor": "padrao", "padrao": false},
+      {"descricao": "Por extenso, ex.: Duzentos e cinquenta reais e cinquenta e cinco centavos", "valor": "extenso", "padrao": true}
+    ]
+  }],
+  "renderizavel": true,
+  "exibirNoFront": true
+}, {
+  "chave": "processo.data_ultima_distribuicao",
+  "grupo": "processo",
+  "descricao": "Data da última distribuição",
+  "parametros": [{
+    "descricao": "Exibir com a seguinte formatação:",
+    "chave": "data",
+    "opcoes": [
+      {"descricao": "19/01/2011", "valor": "padrao", "padrao": true},
+      {"descricao": "19 de Janeiro de 2011", "valor": "longo_sem_dia_semana", "padrao": false},
+      {"descricao": "Segunda-feira, 19 de Janeiro de 2011", "valor": "longo", "padrao": false}
+    ]
+  }],
+  "renderizavel": true,
+  "exibirNoFront": true
+}, {
+  "chave": "data.hoje",
+  "grupo": "data",
+  "descricao": "Data atual",
+  "parametros": [{
+    "descricao": "Exibir com a seguinte formatação:",
+    "chave": "data",
+    "opcoes": [
+      {"descricao": "21:22", "valor": "hora", "padrao": false},
+      {"descricao": "vinte e uma horas e vinte e dois minutos", "valor": "hora_extenso", "padrao": false},
+      {"descricao": "21:22:22", "valor": "hora_segundos", "padrao": false},
+      {"descricao": "19/01/2011", "valor": "padrao", "padrao": true},
+      {"descricao": "19/01/2011 21:22", "valor": "padrao_horario", "padrao": false},
+      {"descricao": "19 de Janeiro de 2011", "valor": "longo_sem_dia_semana", "padrao": false},
+      {"descricao": "19 de Janeiro de 2011 às 21:22", "valor": "longo_horario_sem_dia_semana", "padrao": false},
+      {"descricao": "Segunda-feira, 19 de Janeiro de 2011", "valor": "longo", "padrao": false},
+      {"descricao": "Segunda-feira, 19 de Janeiro de 2011 às 21:22", "valor": "longo_horario", "padrao": false}
+    ]
+  }],
+  "renderizavel": true,
+  "exibirNoFront": true
+}, {
+  "chave": "data.extenso",
+  "grupo": "data",
+  "descricao": "Data atual por extenso. Ex.: Segunda-feira, 19 de Janeiro de 2011",
+  "parametros": [{
+    "descricao": "Exibir com a seguinte formatação:",
+    "chave": "data",
+    "opcoes": [
+      {"descricao": "19 de Janeiro de 2011", "valor": "longo_sem_dia_semana", "padrao": false},
+      {"descricao": "19 de Janeiro de 2011 às 21:22", "valor": "longo_horario_sem_dia_semana", "padrao": false},
+      {"descricao": "Segunda-feira, 19 de Janeiro de 2011", "valor": "longo", "padrao": true},
+      {"descricao": "Segunda-feira, 19 de Janeiro de 2011 às 21:22", "valor": "longo_horario", "padrao": false}
+    ]
+  }],
+  "renderizavel": true,
+  "exibirNoFront": true
+}, {
+  "chave": "data.extenso_sem_dia_semana",
+  "grupo": "data",
+  "descricao": "Data atual por extenso. Ex.: 19 de Janeiro de 2011",
+  "parametros": [{
+    "descricao": "Exibir com a seguinte formatação:",
+    "chave": "data",
+    "opcoes": [
+      {"descricao": "19 de Janeiro de 2011", "valor": "longo_sem_dia_semana", "padrao": true},
+      {"descricao": "19 de Janeiro de 2011 às 21:22", "valor": "longo_horario_sem_dia_semana", "padrao": false}
+    ]
+  }],
+  "renderizavel": true,
+  "exibirNoFront": true
+}, {
+  "chave": "hora.agora",
+  "grupo": "hora",
+  "descricao": "Hora atual. Ex.: 08:00",
+  "parametros": [{
+    "descricao": "Exibir com a seguinte formatação:",
+    "chave": "data",
+    "opcoes": [
+      {"descricao": "21:22", "valor": "hora", "padrao": true},
+      {"descricao": "21:22:22", "valor": "hora_segundos", "padrao": false},
+      {"descricao": "vinte e uma horas e vinte e dois minutos", "valor": "hora_extenso", "padrao": false}
+    ]
+  }],
+  "renderizavel": true,
+  "exibirNoFront": true
+}, {
+  "chave": "hora.extenso",
+  "grupo": "hora",
+  "descricao": "Hora atual por extenso. Ex.: Nove horas e três minutos",
+  "parametros": [{
+    "descricao": "Exibir com a seguinte formatação:",
+    "chave": "data",
+    "opcoes": [
+      {"descricao": "vinte e uma horas e vinte e dois minutos", "valor": "hora_extenso", "padrao": true}
+    ]
+  }],
+  "renderizavel": true,
+  "exibirNoFront": true
+}, {
+  "chave": "polo_ativo.advogados",
+  "grupo": "polo ativo",
+  "descricao": "Nomes dos Advogados",
+  "parametros": [{
+    "descricao": "Separar os nomes com:",
+    "chave": "lista",
+    "opcoes": [
+      {"descricao": "Vírgula", "valor": "virgula", "padrao": true},
+      {"descricao": "Quebra de linha", "valor": "quebra_de_linha", "padrao": false}
+    ]
+  }, {
+    "descricao": "Incluir documento:",
+    "chave": "com_documento",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": true},
+      {"descricao": "Nao", "valor": false, "padrao": false}
+    ]
+  }, {
+    "descricao": "Incluir Endereço:",
+    "chave": "com_endereco",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": false},
+      {"descricao": "Nao", "valor": false, "padrao": true}
+    ]
+  }, {
+    "descricao": "Incluir tratativa no início. Exemplo \"Requerentes:\" ou \"Advogados:\":",
+    "chave": "com_tratativa",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": true},
+      {"descricao": "Nao", "valor": false, "padrao": false}
+    ]
+  }],
+  "renderizavel": null,
+  "exibirNoFront": true
+}, {
+  "chave": "polo_ativo.advogados_com_endereco",
+  "grupo": "polo ativo",
+  "descricao": "Nomes dos advogados com endereço.",
+  "parametros": [{
+    "descricao": "Separar os nomes com:",
+    "chave": "lista",
+    "opcoes": [
+      {"descricao": "Vírgula", "valor": "virgula", "padrao": true},
+      {"descricao": "Quebra de linha", "valor": "quebra_de_linha", "padrao": false}
+    ]
+  }, {
+    "descricao": "Incluir documento:",
+    "chave": "com_documento",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": true},
+      {"descricao": "Nao", "valor": false, "padrao": false}
+    ]
+  }, {
+    "descricao": "Incluir Endereço:",
+    "chave": "com_endereco",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": true},
+      {"descricao": "Nao", "valor": false, "padrao": false}
+    ]
+  }, {
+    "descricao": "Incluir tratativa no início. Exemplo \"Requerentes:\" ou \"Advogados:\":",
+    "chave": "com_tratativa",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": true},
+      {"descricao": "Nao", "valor": false, "padrao": false}
+    ]
+  }],
+  "renderizavel": null,
+  "exibirNoFront": true
+}, {
+  "chave": "polo_ativo.partes",
+  "grupo": "polo ativo",
+  "descricao": "Nomes das partes.",
+  "parametros": [{
+    "descricao": "Separar os nomes com:",
+    "chave": "lista",
+    "opcoes": [
+      {"descricao": "Vírgula", "valor": "virgula", "padrao": true},
+      {"descricao": "Quebra de linha", "valor": "quebra_de_linha", "padrao": false}
+    ]
+  }, {
+    "descricao": "Incluir documento CPF/CNPJ para parte:",
+    "chave": "com_documento",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": false},
+      {"descricao": "Nao", "valor": false, "padrao": true}
+    ]
+  }, {
+    "descricao": "Incluir Endereço:",
+    "chave": "com_endereco",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": false},
+      {"descricao": "Nao", "valor": false, "padrao": true}
+    ]
+  }, {
+    "descricao": "Incluir tratativa no início. Exemplo \"Requerentes:\" ou \"Advogados:\":",
+    "chave": "com_tratativa",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": true},
+      {"descricao": "Nao", "valor": false, "padrao": false}
+    ]
+  }],
+  "renderizavel": null,
+  "exibirNoFront": true
+}, {
+  "chave": "polo_ativo.partes_com_cpf",
+  "grupo": "polo ativo",
+  "descricao": "Nomes das partes com CPF.",
+  "parametros": [{
+    "descricao": "Separar os nomes com:",
+    "chave": "lista",
+    "opcoes": [
+      {"descricao": "Vírgula", "valor": "virgula", "padrao": true},
+      {"descricao": "Quebra de linha", "valor": "quebra_de_linha", "padrao": false}
+    ]
+  }, {
+    "descricao": "Incluir documento:",
+    "chave": "com_documento",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": true},
+      {"descricao": "Nao", "valor": false, "padrao": false}
+    ]
+  }, {
+    "descricao": "Incluir Endereço:",
+    "chave": "com_endereco",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": false},
+      {"descricao": "Nao", "valor": false, "padrao": true}
+    ]
+  }, {
+    "descricao": "Incluir tratativa no início. Exemplo \"Requerentes:\" ou \"Advogados:\":",
+    "chave": "com_tratativa",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": true},
+      {"descricao": "Nao", "valor": false, "padrao": false}
+    ]
+  }],
+  "renderizavel": null,
+  "exibirNoFront": true
+}, {
+  "chave": "polo_ativo.partes_com_cpf_e_endereco",
+  "grupo": "polo ativo",
+  "descricao": "Nomes das partes com CPF e endereço.",
+  "parametros": [{
+    "descricao": "Separar os nomes com:",
+    "chave": "lista",
+    "opcoes": [
+      {"descricao": "Vírgula", "valor": "virgula", "padrao": true},
+      {"descricao": "Quebra de linha", "valor": "quebra_de_linha", "padrao": false}
+    ]
+  }, {
+    "descricao": "Incluir documento:",
+    "chave": "com_documento",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": true},
+      {"descricao": "Nao", "valor": false, "padrao": false}
+    ]
+  }, {
+    "descricao": "Incluir Endereço:",
+    "chave": "com_endereco",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": true},
+      {"descricao": "Nao", "valor": false, "padrao": false}
+    ]
+  }, {
+    "descricao": "Incluir tratativa no início. Exemplo \"Requerentes:\" ou \"Advogados:\":",
+    "chave": "com_tratativa",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": true},
+      {"descricao": "Nao", "valor": false, "padrao": false}
+    ]
+  }],
+  "renderizavel": null,
+  "exibirNoFront": true
+}, {
+  "chave": "polo_ativo.partes_com_endereco",
+  "grupo": "polo ativo",
+  "descricao": "Nomes das partes com endereço.",
+  "parametros": [{
+    "descricao": "Separar os nomes com:",
+    "chave": "lista",
+    "opcoes": [
+      {"descricao": "Vírgula", "valor": "virgula", "padrao": true},
+      {"descricao": "Quebra de linha", "valor": "quebra_de_linha", "padrao": false}
+    ]
+  }, {
+    "descricao": "Incluir documento:",
+    "chave": "com_documento",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": false},
+      {"descricao": "Nao", "valor": false, "padrao": true}
+    ]
+  }, {
+    "descricao": "Incluir Endereço:",
+    "chave": "com_endereco",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": true},
+      {"descricao": "Nao", "valor": false, "padrao": false}
+    ]
+  }, {
+    "descricao": "Incluir tratativa no início. Exemplo \"Requerentes:\" ou \"Advogados:\":",
+    "chave": "com_tratativa",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": true},
+      {"descricao": "Nao", "valor": false, "padrao": false}
+    ]
+  }],
+  "renderizavel": null,
+  "exibirNoFront": true
+}, {
+  "chave": "polo_passivo.advogados",
+  "grupo": "polo passivo",
+  "descricao": "Nomes dos Advogados (com OAB) separados por vírgula.",
+  "parametros": [{
+    "descricao": "Separar os nomes com:",
+    "chave": "lista",
+    "opcoes": [
+      {"descricao": "Vírgula", "valor": "virgula", "padrao": true},
+      {"descricao": "Quebra de linha", "valor": "quebra_de_linha", "padrao": false}
+    ]
+  }, {
+    "descricao": "Incluir documento:",
+    "chave": "com_documento",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": true},
+      {"descricao": "Nao", "valor": false, "padrao": false}
+    ]
+  }, {
+    "descricao": "Incluir Endereço:",
+    "chave": "com_endereco",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": false},
+      {"descricao": "Nao", "valor": false, "padrao": true}
+    ]
+  }, {
+    "descricao": "Incluir tratativa no início. Exemplo \"Requerentes:\" ou \"Advogados:\":",
+    "chave": "com_tratativa",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": true},
+      {"descricao": "Nao", "valor": false, "padrao": false}
+    ]
+  }],
+  "renderizavel": null,
+  "exibirNoFront": true
+}, {
+  "chave": "polo_passivo.advogados_com_endereco",
+  "grupo": "polo passivo",
+  "descricao": "Nomes dos advogados com endereço.",
+  "parametros": [{
+    "descricao": "Separar os nomes com:",
+    "chave": "lista",
+    "opcoes": [
+      {"descricao": "Vírgula", "valor": "virgula", "padrao": true},
+      {"descricao": "Quebra de linha", "valor": "quebra_de_linha", "padrao": false}
+    ]
+  }, {
+    "descricao": "Incluir documento:",
+    "chave": "com_documento",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": true},
+      {"descricao": "Nao", "valor": false, "padrao": false}
+    ]
+  }, {
+    "descricao": "Incluir Endereço:",
+    "chave": "com_endereco",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": true},
+      {"descricao": "Nao", "valor": false, "padrao": false}
+    ]
+  }, {
+    "descricao": "Incluir tratativa no início. Exemplo \"Requerentes:\" ou \"Advogados:\":",
+    "chave": "com_tratativa",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": true},
+      {"descricao": "Nao", "valor": false, "padrao": false}
+    ]
+  }],
+  "renderizavel": null,
+  "exibirNoFront": true
+}, {
+  "chave": "polo_passivo.partes",
+  "grupo": "polo passivo",
+  "descricao": "Nomes das partes.",
+  "parametros": [{
+    "descricao": "Separar os nomes com:",
+    "chave": "lista",
+    "opcoes": [
+      {"descricao": "Vírgula", "valor": "virgula", "padrao": true},
+      {"descricao": "Quebra de linha", "valor": "quebra_de_linha", "padrao": false}
+    ]
+  }, {
+    "descricao": "Incluir documento:",
+    "chave": "com_documento",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": false},
+      {"descricao": "Nao", "valor": false, "padrao": true}
+    ]
+  }, {
+    "descricao": "Incluir Endereço:",
+    "chave": "com_endereco",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": false},
+      {"descricao": "Nao", "valor": false, "padrao": true}
+    ]
+  }, {
+    "descricao": "Incluir tratativa no início. Exemplo \"Requerentes:\" ou \"Advogados:\":",
+    "chave": "com_tratativa",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": true},
+      {"descricao": "Nao", "valor": false, "padrao": false}
+    ]
+  }],
+  "renderizavel": null,
+  "exibirNoFront": true
+}, {
+  "chave": "polo_passivo.partes_com_cpf",
+  "grupo": "polo passivo",
+  "descricao": "Nomes das partes com CPF.",
+  "parametros": [{
+    "descricao": "Separar os nomes com:",
+    "chave": "lista",
+    "opcoes": [
+      {"descricao": "Vírgula", "valor": "virgula", "padrao": true},
+      {"descricao": "Quebra de linha", "valor": "quebra_de_linha", "padrao": false}
+    ]
+  }, {
+    "descricao": "Incluir documento:",
+    "chave": "com_documento",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": true},
+      {"descricao": "Nao", "valor": false, "padrao": false}
+    ]
+  }, {
+    "descricao": "Incluir Endereço:",
+    "chave": "com_endereco",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": false},
+      {"descricao": "Nao", "valor": false, "padrao": true}
+    ]
+  }, {
+    "descricao": "Incluir tratativa no início. Exemplo \"Requerentes:\" ou \"Advogados:\":",
+    "chave": "com_tratativa",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": true},
+      {"descricao": "Nao", "valor": false, "padrao": false}
+    ]
+  }],
+  "renderizavel": null,
+  "exibirNoFront": true
+}, {
+  "chave": "polo_passivo.partes_com_cpf_e_endereco",
+  "grupo": "polo passivo",
+  "descricao": "Nomes das partes com CPF e endereço.",
+  "parametros": [{
+    "descricao": "Separar os nomes com:",
+    "chave": "lista",
+    "opcoes": [
+      {"descricao": "Vírgula", "valor": "virgula", "padrao": true},
+      {"descricao": "Quebra de linha", "valor": "quebra_de_linha", "padrao": false}
+    ]
+  }, {
+    "descricao": "Incluir documento:",
+    "chave": "com_documento",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": true},
+      {"descricao": "Nao", "valor": false, "padrao": false}
+    ]
+  }, {
+    "descricao": "Incluir Endereço:",
+    "chave": "com_endereco",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": true},
+      {"descricao": "Nao", "valor": false, "padrao": false}
+    ]
+  }, {
+    "descricao": "Incluir tratativa no início. Exemplo \"Requerentes:\" ou \"Advogados:\":",
+    "chave": "com_tratativa",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": true},
+      {"descricao": "Nao", "valor": false, "padrao": false}
+    ]
+  }],
+  "renderizavel": null,
+  "exibirNoFront": true
+}, {
+  "chave": "polo_passivo.partes_com_endereco",
+  "grupo": "polo passivo",
+  "descricao": "Nomes das partes com endereço.",
+  "parametros": [{
+    "descricao": "Separar os nomes com:",
+    "chave": "lista",
+    "opcoes": [
+      {"descricao": "Vírgula", "valor": "virgula", "padrao": true},
+      {"descricao": "Quebra de linha", "valor": "quebra_de_linha", "padrao": false}
+    ]
+  }, {
+    "descricao": "Incluir documento:",
+    "chave": "com_documento",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": false},
+      {"descricao": "Nao", "valor": false, "padrao": true}
+    ]
+  }, {
+    "descricao": "Incluir Endereço:",
+    "chave": "com_endereco",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": true},
+      {"descricao": "Nao", "valor": false, "padrao": false}
+    ]
+  }, {
+    "descricao": "Incluir tratativa no início. Exemplo \"Requerentes:\" ou \"Advogados:\":",
+    "chave": "com_tratativa",
+    "opcoes": [
+      {"descricao": "Sim", "valor": true, "padrao": true},
+      {"descricao": "Nao", "valor": false, "padrao": false}
+    ]
+  }],
+  "renderizavel": null,
+  "exibirNoFront": true
+}, {
+  "chave": "orgao_julgador.cidade",
+  "grupo": "órgão julgador",
+  "descricao": "Ex.: Porto Velho",
+  "parametros": [],
+  "renderizavel": true,
+  "exibirNoFront": true
+}, {
+  "chave": "orgao_julgador.uf",
+  "grupo": "órgão julgador",
+  "descricao": "Ex.: RO",
+  "parametros": [],
+  "renderizavel": true,
+  "exibirNoFront": true
+}, {
+  "chave": "orgao_julgador.endereco",
+  "grupo": "órgão julgador",
+  "descricao": "Ex.: Avenida Amazonas, 2375, Esquina, Nova Porto Velho, PORTO VELHO - RO - CEP: 76820-163",
+  "parametros": [],
+  "renderizavel": true,
+  "exibirNoFront": true
+}, {
+  "chave": "orgao_julgador.nome",
+  "grupo": "órgão julgador",
+  "descricao": "Ex.: Porto Velho - 4º Juizado Especial Cível",
+  "parametros": [],
+  "renderizavel": true,
+  "exibirNoFront": true
+}, {
+  "chave": "orgao_julgador.juiz",
+  "grupo": "órgão julgador",
+  "descricao": "Nome do Magistrado",
+  "parametros": [],
+  "renderizavel": false,
+  "exibirNoFront": true
+}, {
+  "chave": "orgao_julgador.magistrado",
+  "grupo": "órgão julgador",
+  "descricao": "Nome do Magistrado",
+  "parametros": [],
+  "renderizavel": false,
+  "exibirNoFront": true
+}, {
+  "chave": "ambiente.perfis",
+  "grupo": "ambiente",
+  "descricao": "Perfis do usuário logado",
+  "parametros": [],
+  "renderizavel": true,
+  "exibirNoFront": true
+}, {
+  "chave": "ambiente.login",
+  "grupo": "ambiente",
+  "descricao": "Login do usuário logado",
+  "parametros": [],
+  "renderizavel": true,
+  "exibirNoFront": true
+}, {
+  "chave": "alvara.conta_judicial",
+  "grupo": "alvara",
+  "descricao": "Dados da conta judicial",
+  "parametros": [{
+    "descricao": "Exibir o saldo atualizado:",
+    "chave": "dinheiro",
+    "opcoes": [
+      {"descricao": "Com saldo", "valor": "com_saldo", "padrao": true},
+      {"descricao": "Com saldo atualizado", "valor": "com_saldo_atualizado", "padrao": false}
+    ]
+  }],
+  "renderizavel": true,
+  "exibirNoFront": true
+},{
+  "chave": "alvara.conta_judicial_favorecido",
+  "grupo": "alvara",
+  "descricao": "Informações da conta judicial e favorecido",
+  "parametros": [],
+  "renderizavel": true,
+  "exibirNoFront": true
+},{
+  "chave": "alvara.favorecidos",
+  "grupo": "alvara",
+  "descricao": "Lista de favorecidos cadastrados no alvará",
+  "parametros": [{
+    "descricao": "Separar os nomes com:",
+    "chave": "lista",
+    "opcoes": [
+      {"descricao": "Vírgula", "valor": "virgula", "padrao": true},
+      {"descricao": "Quebra de linha", "valor": "quebra_de_linha", "padrao": false}
+      ]
+  }],
+  "renderizavel": true,
+  "exibirNoFront": true
+}]

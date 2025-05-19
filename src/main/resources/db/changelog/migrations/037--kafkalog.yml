@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: 37
+      author: Andrew
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: KAFKALOG
+      changes:
+        - createTable:
+            tableName: KAFKALOG
+            columns:
+              - column:
+                  name: checksum
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_kafkalog
+              - column:
+                  name: key
+                  type: varchar(255)
+              - column:
+                  name: off_set
+                  type: BIGINT
+              - column:
+                  name: partition
+                  type: int
+              - column:
+                  name: timestamp
+                  type: BIGINT
+              - column:
+                  name: topic
+                  type: varchar(255)
+              - column:
+                  name: valor
+                  type: clob
+              - column:
+                  name: resultado
+                  type: varchar(255)

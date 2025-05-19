@@ -1,0 +1,50 @@
+databaseChangeLog:
+  - changeSet:
+      id: 18
+      author: Jônatas
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: PUBLICAR_DJE
+      changes:
+        - createTable:
+            tableName: PUBLICAR_DJE
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_publicar_dje
+              - column:
+                  name: prazo
+                  type: bigint
+                  constraints:
+                    allownull: false
+              - column:
+                  name: conteudo
+                  type: clob
+              - column:
+                  name: id_minuta
+                  type: bigint
+              - column:
+                  name: publicar
+                  type: boolean
+        - createSequence:
+            incrementBy: 1
+            minValue: 1
+            sequenceName: SEQUENCIA_PUBLICAR_DJE
+            startValue: 1
+        - addForeignKeyConstraint:
+            baseColumnNames: id_minuta
+            baseTableName: PUBLICAR_DJE
+            constraintName: FK_PUBLICAR_DJE_MINUTA
+            deferreable: true
+            initiallyDeferred: true
+            onDelete: No Action
+            onUpdate: No Action
+            referencedColumnNames: id
+            referencedTableName: MINUTA
+

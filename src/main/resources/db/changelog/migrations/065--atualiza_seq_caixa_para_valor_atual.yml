@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: 65
+      author: Guilherme oliveira
+      changes:
+        - sql:
+            sql: "SELECT setval('SEQUENCIA_CAIXA', (SELECT COALESCE(MAX(id), 0) + 1 FROM caixa));"

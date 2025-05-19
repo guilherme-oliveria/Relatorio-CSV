@@ -1,0 +1,11 @@
+---
+
+databaseChangeLog:
+  - property:
+      name: json
+      value: clob
+      dbms: postgresql
+  - property:
+      name: json
+      value: clob
+      dbms: oracle

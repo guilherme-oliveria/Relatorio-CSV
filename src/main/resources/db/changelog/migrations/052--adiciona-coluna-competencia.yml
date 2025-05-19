@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: 52
+      author: Paulo Jorge
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - columnExists:
+                tableName: processo
+                columnName: competencia
+      changes:
+      - addColumn:
+          tableName: processo
+          columns:
+          - column:
+              name: competencia
+              type: varchar(255)
+

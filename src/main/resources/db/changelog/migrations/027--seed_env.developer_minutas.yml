@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: 27
+      context: developer
+      author: Andrew May
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: SELECT COUNT(*) FROM minuta
+      changes:
+        - loadData:
+            columns:
+              - column:
+                  name: id
+                  type: numeric
+              - column:
+                  name: minuta_html
+                  type: string
+              - column:
+                  name: id_processo
+                  type: datetime
+            encoding: UTF-8
+            file: ./db/changelog/seeds/csv/minuta.csv
+            tableName: minuta

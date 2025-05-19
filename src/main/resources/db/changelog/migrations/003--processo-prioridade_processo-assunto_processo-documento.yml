@@ -1,0 +1,187 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: Andrew May
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: processo_assunto
+      changes:
+        - createTable:
+            tableName: processo_assunto
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_processo_assunto
+              - column:
+                  name: data_inclusao
+                  type: java.sql.Types.TIMESTAMP
+              - column:
+                  name: id_assunto
+                  type: bigint
+              - column:
+                  name: is_assunto_principal
+                  type: boolean
+              - column:
+                  name: is_excluido
+                  type: boolean
+              - column:
+                  name: id_processo
+                  type: int
+              - column:
+                  name: data_exclusao
+                  type: java.sql.Types.TIMESTAMP
+        - addForeignKeyConstraint:
+            baseColumnNames: id_processo
+            baseTableName: processo_assunto
+            constraintName: fk_processo_assunto_processo
+            deferreable: true
+            initiallyDeferred: true
+            onDelete: No Action
+            onUpdate: No Action
+            referencedColumnNames: id
+            referencedTableName: processo
+        - createTable:
+            tableName: processo_documento
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_processo_documento
+              - column:
+                  name: data_juntada
+                  type: date
+              - column:
+                  name: descricao
+                  type: varchar(255)
+              - column:
+                  name: documento_html
+                  type: clob
+              - column:
+                  name: eh_binario
+                  type: boolean
+              - column:
+                  name: eh_sigiloso
+                  type: boolean
+              - column:
+                  name: extensao
+                  type: varchar(255)
+              - column:
+                  name: hash_storage
+                  type: varchar(255)
+              - column:
+                  name: hash_p7s
+                  type: varchar(255)
+              - column:
+                  name: hash_thumbnail
+                  type: varchar(255)
+              - column:
+                  name: id_documento_sistema_legado
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: md5_documento
+                  type: varchar(255)
+              - column:
+                  name: nomeuserinclusao
+                  type: varchar(255)
+              - column:
+                  name: nr_documento_storage
+                  type: varchar(255)
+              - column:
+                  name: id_processo
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: id_tipo_documento
+                  type: VARCHAR(255)
+              - column:
+                  name: ativo
+                  type: boolean
+              - column:
+                  name: data_exclusao
+                  type: date
+              - column:
+                  name: id_usuario_exclusao
+                  type: varchar(255)
+              - column:
+                  name: motivo_exclusao
+                  type: varchar(255)
+              - column:
+                  name: nr_ordem
+                  type: int
+        - addForeignKeyConstraint:
+            baseColumnNames: id_processo
+            baseTableName: processo_documento
+            constraintName: fk_processo_documento_processo
+            deferreable: true
+            initiallyDeferred: true
+            onDelete: Cascade
+            onUpdate: Cascade
+            referencedColumnNames: id
+            referencedTableName: processo
+        - createTable:
+            tableName: prioridade_processual
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_prioridade_processual
+              - column:
+                  name: descricao
+                  type: varchar(255)
+              - column:
+                  name: icone_font_awesome
+                  type: varchar(255)
+              - column:
+                  name: idade_minima
+                  type: int
+        - createTable:
+            tableName: processo_prioridade
+            columns:
+              - column:
+                  name: processo_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: prioridades_id
+                  type: int
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: prioridades_id
+            baseTableName: processo_prioridade
+            constraintName: fk_processo_prioridade_pri_pro
+            deferreable: true
+            initiallyDeferred: true
+            onDelete: No Action
+            onUpdate: No Action
+            referencedColumnNames: id
+            referencedTableName: processo
+        - addForeignKeyConstraint:
+            baseColumnNames: processo_id
+            baseTableName: processo_prioridade
+            constraintName: fk_processo_prioridade_proc
+            deferreable: true
+            initiallyDeferred: true
+            onDelete: No Action
+            onUpdate: No Action
+            referencedColumnNames: id
+            referencedTableName: prioridade_processual
+
+
+

@@ -1,0 +1,48 @@
+ID,NOME
+1,Decisão
+81,Despacho Inicial - Urgente
+82,Despacho Inicial
+161,Julgamento Urgente
+241,(JEC) Julgamento Revelia
+141,Despacho Urgente
+221,(JEC) Decisão
+222,(JEC) Decisão JUD'S
+223,(JEC) Despacho
+224,(JEC) Julgamento Extinção
+225,(JEC) Despacho Alvará
+361,(JEC) Despacho Inicial
+101,Julgamento Embargos
+121,Decisão Urgente
+181,Despacho Gratuidade Recursal
+321,(JEC) Despacho Gratuidade Recursal
+341,(JEC) Decisão Desconto em Folha
+421,(JEC) Despacho Descumprimento de Acordo
+61,Decisão Desconto em Folha
+62,Decisão Liminar ou Tutela
+63,Decisão Remoção ou Adjudicação
+64,Despacho Descumprimento de Acordo
+65,Despacho Remessa
+66,Julgamento Mérito
+67,Julgamento Revelia
+261,(JEC) Julgamento Mérito
+262,(JEC) Despacho Remessa
+263,(JEC) Julgamento Embargos
+281,(JEC) Julgamento Homologação
+22,Decisão Agravo de Instrumento
+23,Decisão Embargos
+24,Decisão JUD'S
+25,Decisão Liminar com emenda á inicial
+26,Decisão Saneadora
+27,Despacho
+28,Despacho Alvará
+29,Despacho Emendas
+30,Despacho Execuções de alimentos
+31,Despacho Família
+32,Julgamento
+33,Julgamento Extinção
+34,Julgamento Homologação
+41,Decisão Falência e Recuperação Judicial
+201,(JEC) Julgamento
+301,(JEC) Decisão Liminar ou Tutela
+381,(JEC) Decisão - Urgente
+401,(JEC) Decisão Remoção ou Adjudicação

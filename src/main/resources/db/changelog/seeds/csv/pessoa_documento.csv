@@ -1,0 +1,7 @@
+id,id_pessoa,id_pessoa_legado,id_documento_legado,tipo_documento,documento,id_estado
+1,1,2,2,CPF,01715570421,22
+2,2,3,3,CPF,17346972619,22
+3,3,4,4,CPF,59378404618,22
+4,4,666,666,CPF,32156080062,22
+5,2,3,3,OAB,6661,24
+6,4,666,666,OAB,7771,25

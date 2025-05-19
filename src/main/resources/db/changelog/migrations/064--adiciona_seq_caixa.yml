@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: 64
+      author: Guilherme oliveira
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - sequenceExists:
+                sequenceName: SEQUENCIA_CAIXA
+      changes:
+        - createSequence:
+            incrementBy: 1
+            minValue: 1
+            sequenceName: SEQUENCIA_CAIXA
+            startValue: 1
+        - createSequence:
+            incrementBy: 1
+            minValue: 1
+            sequenceName: SEQ_FILTRO
+            startValue: 1
+        - createSequence:
+            incrementBy: 1
+            minValue: 1
+            sequenceName: SEQ_MINUTA_RECEBIDA
+            startValue: 1
+        - createSequence:
+            incrementBy: 1
+            minValue: 1
+            sequenceName: SEQUENCIA_PROCESSO_RELACIONADO
+            startValue: 1
+

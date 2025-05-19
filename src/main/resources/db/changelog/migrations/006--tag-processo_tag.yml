@@ -1,0 +1,90 @@
+databaseChangeLog:
+  - changeSet:
+      id: 6
+      author: Andrew May
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: TAG
+      changes:
+        - createTable:
+            tableName: TAG
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_tag
+              - column:
+                  name: tag
+                  type: varchar(255)
+              - column:
+                  name: orgao_julgador_str
+                  type: varchar(255)
+              - column:
+                  name: cor_hexadecimal
+                  type: varchar(255)
+              - column:
+                  name: data_exclusao
+                  type: java.sql.Types.TIMESTAMP
+              - column:
+                  name: usuario_exclusao
+                  type: varchar(255)
+        - createSequence:
+            incrementBy: 1
+            minValue: 1
+            sequenceName: SEQUENCIA_TAG
+            startValue: 1
+        - createTable:
+            tableName: PROCESSO_TAG
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_processo_tag
+              - column:
+                  name: id_processo
+                  type: BIGINT
+              - column:
+                  name: id_tag
+                  type: int
+              - column:
+                  name: persistente
+                  type: boolean
+              - column:
+                  name: data_exclusao
+                  type: java.sql.Types.TIMESTAMP
+              - column:
+                  name: usuario_exclusao
+                  type: varchar(255)
+        - addForeignKeyConstraint:
+            baseColumnNames: id_processo
+            baseTableName: processo_tag
+            constraintName: FK_TAG_PROCESSO
+            deferreable: true
+            initiallyDeferred: true
+            onDelete: No Action
+            onUpdate: No Action
+            referencedColumnNames: id
+            referencedTableName: processo
+        - addForeignKeyConstraint:
+            baseColumnNames: id_tag
+            baseTableName: processo_tag
+            constraintName: FK_TAG
+            deferreable: true
+            initiallyDeferred: true
+            onDelete: No Action
+            onUpdate: No Action
+            referencedColumnNames: id
+            referencedTableName: tag
+        - createSequence:
+            incrementBy: 1
+            minValue: 1
+            sequenceName: sequencia_processo_tag
+            startValue: 1

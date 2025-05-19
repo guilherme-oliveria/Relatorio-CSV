@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: 30
+      context: developer
+      author: Andrew May
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: SELECT COUNT(*) FROM pessoa_documento
+      changes:
+        - loadData:
+            columns:
+              - column:
+                  name: id
+                  type: numeric
+            encoding: UTF-8
+            file: ./db/changelog/seeds/csv/pessoa_documento.csv
+            tableName: pessoa_documento

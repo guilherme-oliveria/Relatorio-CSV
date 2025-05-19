@@ -1,0 +1,89 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: Andrew May
+      context: developer
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: SELECT COUNT(*) FROM caixa
+      changes:
+        - loadData:
+            catalogName: caixa-seed
+            columns:
+              - column:
+                  name: id
+                  type: numeric
+              - column:
+                  name: nome
+                  type: string
+            encoding: UTF-8
+            file: ./db/changelog/seeds/csv/caixa.csv
+            schemaName: public
+            tableName: caixa
+        - loadData:
+              columns:
+                - column:
+                    name: id
+                    type: numeric
+                - column:
+                    name: assunto_principal
+                    type: string
+                - column:
+                    name: data_entrada
+                    type: datetime
+                - column:
+                    name: dt_distribuicao
+                    type: datetime
+                - column:
+                    name: classe_judicial
+                    type: numeric
+                - column:
+                    name: id_processo_sistema_legado
+                    type: numeric
+                - column:
+                    name: instancia
+                    type: numeric
+                - column:
+                    name: justica_gratuita
+                    type: boolean
+                - column:
+                    name: numero_processo
+                    type: string
+                - column:
+                    name: orgao_julgador_str
+                    type: string
+                - column:
+                    name: possui_liminar
+                    type: boolean
+                - column:
+                    name: prioridade
+                    type: boolean
+                - column:
+                    name: segredo_justica
+                    type: boolean
+                - column:
+                    name: sistema
+                    type: string
+                - column:
+                    name: tarefaenum
+                    type: string
+                - column:
+                    name: vl_causa
+                    type: numeric
+                - column:
+                    name: id_caixa
+                    type: numeric
+                - column:
+                    name: data_sincronizacao
+                    type: datetime
+                - column:
+                    name: erro_sincronizacao
+                    type: numeric
+                - column:
+                    name: motivo_segredo_justica
+                    type: string
+              encoding: UTF-8
+              file: ./db/changelog/seeds/csv/processos.csv
+              tableName: processo

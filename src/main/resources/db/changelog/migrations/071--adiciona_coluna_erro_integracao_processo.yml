@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - include:
+      file: ./db/changelog/types.yml
+  - changeSet:
+      id: 71
+      author: Janderson Bezerra
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - columnExists:
+                tableName: PROCESSO
+                columnName: erro_integracao
+      changes:
+        - addColumn:
+            tableName: PROCESSO
+            columns:
+              - column:
+                  name: erro_integracao
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true

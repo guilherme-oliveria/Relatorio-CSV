@@ -1,0 +1,50 @@
+databaseChangeLog:
+  - changeSet:
+      id: 56
+      author: Andrew Ramires
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: PEDIDO_INCLUSAO_PAUTA
+      changes:
+        - createTable:
+            tableName: PEDIDO_INCLUSAO_PAUTA
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_pedido_pauta
+              - column:
+                  name: html_renderizado
+                  type: clob
+              - column:
+                  name: hash_p7s
+                  type: varchar(255)
+              - column:
+                  name: ID_MINUTA
+                  type: BIGINT
+              - column:
+                  name: data_assinatura
+                  type: datetime
+              - column:
+                  name: id_sistema_legado
+                  type: varchar(255)
+        - createSequence:
+            incrementBy: 1
+            minValue: 1
+            sequenceName: SEQ_PEDIDO_INCLUSAO_PAUTA
+            startValue: 1
+        - addForeignKeyConstraint:
+            baseColumnNames: ID_MINUTA
+            baseTableName: PEDIDO_INCLUSAO_PAUTA
+            constraintName: FK_MINUTA_PEDIDO
+            deferreable: true
+            initiallyDeferred: true
+            onDelete: No Action
+            onUpdate: No Action
+            referencedColumnNames: id
+            referencedTableName: MINUTA

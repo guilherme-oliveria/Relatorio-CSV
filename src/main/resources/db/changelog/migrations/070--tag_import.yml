@@ -1,0 +1,52 @@
+databaseChangeLog:
+  - include:
+      file: ./db/changelog/types.yml
+  - changeSet:
+      id: 70
+      author: Guilherme oliveira
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: tag_import
+      changes:
+        - createSequence:
+              sequenceName: SEQUENCIA_TAG_IMPORT
+              startValue: 1
+              incrementBy: 1
+        - createTable:
+            tableName: tag_import
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: nr_oab
+                  type: VARCHAR(255)
+              - column:
+                  name: sigla_estado
+                  type: VARCHAR(3)
+              - column:
+                  name: nr_processo
+                  type: VARCHAR(255)
+              - column:
+                  name: nome_tag
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cor
+                  type: VARCHAR(255)
+              - column:
+                  name: url
+                  type: VARCHAR(255)
+              - column:
+                  name: aviso
+                  type: VARCHAR(255)
+              - column:
+                  name: apenas_meu_gabinete
+                  type: BOOLEAN
+

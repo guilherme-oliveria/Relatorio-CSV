@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - include:
+      file: ./db/changelog/types.yml
+  - changeSet:
+      id: 68
+      author: Guilherme Oliveira
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - columnExists:
+                tableName: AUTOTEXTO
+                columnName: ID_ORGAO_JULGADOR_STR
+      changes:
+        - renameColumn:
+            tableName: AUTOTEXTO
+            oldColumnName: ID_ORGAO_JULGADOR
+            newColumnName: ID_ORGAO_JULGADOR_STR
+        - modifyDataType:
+            tableName: AUTOTEXTO
+            columnName: ID_ORGAO_JULGADOR_STR
+            newDataType: VARCHAR(255)

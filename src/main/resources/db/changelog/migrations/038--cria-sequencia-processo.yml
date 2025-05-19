@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: 38
+      author: Andrew May
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - sequenceExists:
+                sequenceName: sequencia_processo
+      changes:
+        - createSequence:
+            incrementBy: 1
+            minValue: 1
+            sequenceName: sequencia_processo
+            startValue: 74458

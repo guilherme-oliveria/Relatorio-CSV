@@ -1,0 +1,57 @@
+databaseChangeLog:
+  - changeSet:
+      id: 23
+      author: Jônatas
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: MENSAGEM
+      changes:
+        - createTable:
+            tableName: MENSAGEM
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_mensagem
+              - column:
+                  name: objeto
+                  type: clob
+              - column:
+                  name: titulo
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: mensagem
+                  type: varchar(255)
+              - column:
+                  name: data_limite
+                  type: java.sql.Types.TIMESTAMP
+              - column:
+                  name: usuario_id
+                  type: bigint
+              - column:
+                  name: orgao_julgador_id
+                  type: varchar(21)
+              - column:
+                  name: data_cadastro
+                  type: java.sql.Types.TIMESTAMP
+              - column:
+                  name: excluir_apos_notificacao
+                  type: boolean
+              - column:
+                  name: visualizado
+                  type: boolean
+              - column:
+                  name: enviado
+                  type: boolean
+        - createSequence:
+            incrementBy: 1
+            minValue: 1
+            sequenceName: SEQUENCIA_MENSAGEM
+            startValue: 1

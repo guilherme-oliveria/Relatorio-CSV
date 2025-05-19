@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: 75
+      author: Guilherme oliveira
+      changes:
+        - sql:
+            sql: "ALTER TABLE Endereco ALTER COLUMN bairro DROP NOT NULL;"

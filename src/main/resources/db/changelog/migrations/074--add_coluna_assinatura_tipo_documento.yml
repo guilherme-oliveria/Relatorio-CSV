@@ -1,0 +1,60 @@
+databaseChangeLog:
+  - include:
+      file: ./db/changelog/types.yml
+  - changeSet:
+      id: 74
+      author: Guilherme Oliveira
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - columnExists:
+                tableName: MINUTA
+                columnName: tipo_assinatura
+            - columnExists:
+                tableName: MINUTA
+                columnName: id_assinatura
+            - columnExists:
+                tableName: MINUTA_ANEXO
+                columnName: tipo_assinatura
+            - columnExists:
+                tableName: MINUTA_ANEXO
+                columnName: id_assinatura
+      changes:
+        - addColumn:
+            tableName: MINUTA
+            columns:
+              - column:
+                  name: id_assinatura
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    primaryKey: false
+                    unique: false
+                    primaryKeyName: null
+                    foreignKeyName: FK_ASSINATURA_MINUTA
+                    referencedTableName: ASSINATURA
+                    referencedColumnNames: id
+                    onDelete: No Action
+                    onUpdate: No Action
+              - column:
+                  name: tipo_assinatura
+                  type: VARCHAR(100)
+        - addColumn:
+            tableName: MINUTA_ANEXO
+            columns:
+              - column:
+                  name: id_assinatura
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    primaryKey: false
+                    unique: false
+                    primaryKeyName: null
+                    foreignKeyName: FK_ASSINA_MINUTA_ANEXO
+                    referencedTableName: ASSINATURA
+                    referencedColumnNames: id
+                    onDelete: No Action
+                    onUpdate: No Action
+              - column:
+                  name: tipo_assinatura
+                  type: VARCHAR(100)

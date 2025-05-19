@@ -1,0 +1,50 @@
+databaseChangeLog:
+  - changeSet:
+      id: 13
+      author: Jônatas
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: MINUTA_TAREFA_LOG
+      changes:
+        - createTable:
+            tableName: MINUTA_TAREFA_LOG
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_minuta_tarefa_log
+              - column:
+                  name: id_minuta
+                  type: BIGINT
+              - column:
+                  name: data_log
+                  type: java.sql.Types.TIMESTAMP
+              - column:
+                  name: nome_autor
+                  type: varchar(255)
+              - column:
+                  name: autor_versao
+                  type: varchar(255)
+              - column:
+                  name: tarefaenum
+                  type: varchar(255)
+        - createSequence:
+            incrementBy: 1
+            minValue: 1
+            sequenceName: SEQUENCIA_MINUTA_TAREFA_LOG
+            startValue: 1
+        - addForeignKeyConstraint:
+            baseColumnNames: id_minuta
+            baseTableName: MINUTA_TAREFA_LOG
+            constraintName: FK_MINUTA_TAREFA_LOG
+            deferreable: true
+            initiallyDeferred: true
+            onDelete: No Action
+            onUpdate: No Action
+            referencedColumnNames: id
+            referencedTableName: MINUTA

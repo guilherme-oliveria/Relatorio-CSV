@@ -1,0 +1,145 @@
+namespace: meu-gabinete
+appName: meu-gabinete-back
+container:
+  replicas: 1
+  image: registry.intra.tjmg.gov.br/cojud1a/meu-gabinete/meu-gabinete-back:#branch
+  containerPort: 8080
+  resources:
+    requests:
+      memory: "1Gi"
+      cpu: "600m"
+    limits:
+      memory: "4Gi"
+      cpu: "1000m"
+  readinessProbe:
+    failureThreshold: 3
+    httpGet:
+      path: /version
+      port: 8080
+    initialDelaySeconds: 30
+    successThreshold: 1
+    timeoutSeconds: 10
+    periodSeconds: 30
+  livenessProbe:
+    failureThreshold: 3
+    httpGet:
+      path: /version
+      port: 8080
+    initialDelaySeconds: 120
+    timeoutSeconds: 1
+    periodSeconds: 30
+  env:
+    - name: TJRO_APPNAME
+      value: gabinete
+    - name: TJRO_APPTAG
+      value: meu-gabinete-back
+    - name: TJRO_ENV
+      value: homologacao
+    - name: TZ
+      value: America/Sao_Paulo
+    - name: JAVA_OPTS_APPEND
+      value: '-Duser.timezone=America/Sao_Paulo -Duser.region=BR -Duser.language=pt'
+    - name: spring.application.name
+      value: gabinete-back
+
+rota:
+  host: meu-gabinete-back.apps.ocp-hml.intra.tjmg.gov.br
+  timeout : 600000ms
+
+dynamic:
+  - kind: ConfigMap
+    apiVersion: v1
+    metadata:
+      name: meu-gabinete-back
+      namespace: meu-gabinete
+    data:
+      spring_zipkin_baseUrl: 'http://zipkin:9411'
+      localizadores_url: 'http://localizador.apps.ocp-hml.intra.tjmg.gov.br'
+      scheduled_intervalo_sincronizacao: '-60'
+      keycloak_realm: pje
+      spring_sleuth_sampler_percentage: '0.0'
+      spring_cloud_stream_kafka_binder_brokers: '${KAFKA_HOST:172.24.1.3:9092}'
+      KAFKA_HOST: 'http://kafka.meu-gabinete.svc.cluster.local:9092'
+      spring_datasource_password: m3ugabin3te-4dm1n
+      SPRING_JWT_SET_URI: https://sso.stg.cloud.pje.jus.br/auth/realms/pje/protocol/openid-connect/certs
+      KEYCLOAK_CLIENT_SECRET: 32314005-c90e-4ee2-8e69-6ef155350c74
+      spring_http_encoding_force: 'true'
+      documento_url: 'https://homologapje.tjmg.jus.br/pje/seam/resource/rest/pje-legacy'
+      spring_http_encoding_charset: UTF-8
+      conta_centralizadora: >-
+        {"banco": "104","agencia": "2848","operacao": "040.1","numeroConta":
+        "01529904","digitoVerificador":
+        "5","numeroProcesso":"00759114820108221111","idLegado":76605}
+      verifica_tarefas_concluso: 'false'
+      IA_ATIVADO: 'false'
+      spring_zipkin_sender_type: web
+      spring_datasource_url: 'jdbc:postgresql://10.0.60.17:5432/meugabinete?useSSL=false'
+      modo_autenticacao: keycloak
+      spring_servlet_multipart_max-request-size: 20MB
+      KEYCLOAK_REDIRECT_URI: 'https://homologameugab.tjmg.jus.br/login-keycloak'
+      spring_liquibase_enabled: 'false'
+      URL_TPU: 'http://tpu-api.apps.ocp-hml.intra.tjmg.gov.br/api/v1'
+      spring_servlet_multipart_max-file-size: 10MB
+      scheduled_sincronizar_processos: '60000'
+      spring_jpa_generate-ddl: 'false'
+      IA_QTD_RAMIFICACOES: '2'
+      logging_level_org_hibernate_SQL: DEBUG
+      STORAGE_URL: 'http://pje-binarios.apps.ocp-hml.intra.tjmg.gov.br/jcr-storage-server/documents'
+      scheduled_main: 'false'
+      TAG_VALIDA_EXPEDIENTE_CARTORIO: 'Validar Expediente Cartório|#8800df'
+      MODELO_DOCUMENTO_HOST: 'http://localhost:8091'
+      tarefas_concluso: Enviado para Meu Gabinete
+      kafka_devolve_consumer: 'true'
+      scheduled_busca_processos_conclusos: 'true'
+      IA_HOST: 'http://tjrov-docker.tjro.net:8186/rest'
+      spring_jpa_database-platform: org.hibernate.dialect.PostgreSQLDialect
+      keycloak_client-id: pje-tjmg-1g
+      modelodocumento_back_host: 'https://modelodocumento-api-hml.tjmg.jus.br'
+      STORAGE_USER: admin
+      modelodocumento_front_host: 'https://modelodocumento-ui-hml.tjmg.jus.br'
+      URL_MICROSERVICE_METAS: 'http://localhost:4001'
+      spring_jpa_database: default
+      IA_TIPO_CLASSIFICADOR: CLS_TIPO_MOVIMENTO_MAGISTRADO
+      STORAGE_SENHA: admin
+      assinatura_digital_validar: 'false'
+      CAIXA_VALIDA_EXPEDIENTE_CARTORIO: Validar Expediente Cartório
+      eureka_client_enabled: 'false'
+      TGM_CODEX_ATIVADO: 'false'
+      server_tomcat_uri-encoding: UTF-8
+      spring_jpa_hibernate_ddl-auto: none
+      spring_zipkin_service_name: '${TJRO_APPTAG:gabinete-back}'
+      KAFKA_ENABLE_RUNNER: 'true'
+      spring_messages_encoding: UTF-8
+      spring_jpa_show-sql: 'false'
+      integracao_caixa_url: 'https://integracaocaixa.tjro.jus.br'
+      spring_datasource_initialize: 'true'
+      URL_PJE_PG_REST: 'http://proxy-pje.apps.ocp-hml.intra.tjmg.gov.br'
+      spring_datasource_connectionProperties: useUnicode=true;characterEncoding=utf-8;
+      scheduled_devolve_origem: 'false'
+      IA_QTD_PALAVRAS: '4'
+      logging_level_org_hibernate_type_descriptor_sql_BasicBinder: TRACE
+      lotacoes_url: 'http://orgao-julgador.apps.ocp-hml.intra.tjmg.gov.br'
+      spring_http_encoding_enabled: 'true'
+      tribunal: 'tjmg'
+      URL_PJE_SG_REST: ''
+      spring_datasource_platform: postgres
+      KEYCLOAK_URL_JWT: 'https://sso.stg.cloud.pje.jus.br/auth/realms/pje'
+      KEYCLOAK_AUTH_SERVER_URL_LOGOUT: https://sso.stg.cloud.pje.jus.br/auth/realms/pje/protocol/openid-connect/logout
+      KEYCLOAK_AUTH_SERVER_URL: https://sso.stg.cloud.pje.jus.br/auth/realms/pje/protocol/openid-connect/token
+      spring_liquibase_contexts: developer
+      URL_CORS: 'https://meu-gabinete-front.apps.ocp-hml.intra.tjmg.gov.br,https://meu-gabinete-front.apps.ocp-hml.intra.tjmg.gov.br/login-keycloak,https://meu-gabinete-front.apps.ocp-hml.intra.tjmg.gov.br:[*],https://meu-gabinete-front.apps.ocp-hml.intra.tjmg.gov.br/login-keycloak/[*],https://homologameugab.tjmg.jus.br,https://homologameugab.tjmg.jus.br/login-keycloak,https://homologameugab.tjmg.jus.br[*],https://homologameugab.tjmg.jus.br/login-keycloak/[*],https://modelodocumento-ui-hml.tjmg.jus.br,https://modelodocumento-ui-hml.tjmg.jus.br/[*],https://modelodocumento-ui.apps.ocp-hml.intra.tjmg.gov.br/[*],https://modelodocumento-ui-hml.tjmg.jus.br[*],https://modelodocumento-ui.apps.ocp-hml.intra.tjmg.gov.br[*]'
+      recursos_json: >-
+        {"administrador":["Administrador(a)","Assistente de Cadastro"],
+          "magistrado":["magistrado(a)","Administrador(a)","Escrivão(ã) Judicial","Usuário Justiça Restaurativa"],
+          "assessor":["Diretor de Secretaria","Assessor","Juiz(a) Leigo","Estagiário(a) Gabinete","Assistente de Apoio","Servidor(a) Retificador(a) Gabinete","Escrivão(ã) do Juízo","Escrivão(ã) Judicial","Servidor(a) Plantonista"]  }
+      server_port: '8080'
+      spring_datasource_driver-class-name: org.postgresql.Driver
+      management_security_enabled: 'true'
+      spring_datasource_username: meugabinete
+      STORAGE_TYPE: jcr
+      GABINETE_HOST: ''
+      Access-Control-Allow-Credentials: 'true'
+      nexus: 'http://nexus.intra.tjmg.gov.br/repository/public'
+      management_endpoints_web_exposure_include: health
+      scheduled_devolveParaIntegracaoAutomatico: 'true'
+      url_api_assinador_mobile: 'http://assinador-a1.apps.ocp-hml.intra.tjmg.gov.br/assinador-a1/api/v1/assinar/'

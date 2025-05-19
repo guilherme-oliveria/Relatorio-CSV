@@ -1,0 +1,67 @@
+databaseChangeLog:
+  - changeSet:
+      id: 10
+      author: Jônatas
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: ANOTACAO
+      changes:
+        - createTable:
+            tableName: ANOTACAO
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_anotacao
+              - column:
+                  name: anotacao
+                  type: clob
+                  constraints:
+                    nullable: false
+              - column:
+                  name: usuario_nome
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cpf_usuario
+                  type: varchar(14)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: data_cadastro
+                  type: java.sql.Types.TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: processo_id
+                  type: BIGINT
+              - column:
+                  name: tipo
+                  type: varchar(50)
+              - column:
+                  name: publicidade
+                  type: varchar(255)
+              - column:
+                  name: data_exclusao
+                  type: date
+        - createSequence:
+            incrementBy: 1
+            minValue: 1
+            sequenceName: SEQUENCIA_ANOTACAO
+            startValue: 1
+        - addForeignKeyConstraint:
+            baseColumnNames: processo_id
+            baseTableName: ANOTACAO
+            constraintName: FK_ANOTACAO_PROCESSO_ID
+            deferreable: true
+            initiallyDeferred: true
+            onDelete: No Action
+            onUpdate: No Action
+            referencedColumnNames: id
+            referencedTableName: PROCESSO

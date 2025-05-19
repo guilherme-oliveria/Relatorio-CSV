@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: 36
+      context: developer
+      author: Jônatas
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: SELECT COUNT(*) FROM processo_parte_endereco
+      changes:
+        - loadData:
+            catalogName: processo-parte-endereco-seed
+            columns:
+              - column:
+                  name: id
+                  type: numeric
+              - column:
+                  name: id_processo_parte
+                  type: numeric
+              - column:
+                  name: id_endereco
+                  type: numeric
+              - column:
+                  name: id_processo_parte_legado
+                  type: numeric
+              - column:
+                  name: id_endereco_legado
+                  type: numeric
+            encoding: UTF-8
+            file: ./db/changelog/seeds/csv/processo_parte_endereco.csv
+            schemaName: public
+            tableName: processo_parte_endereco

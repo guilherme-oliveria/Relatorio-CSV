@@ -1,0 +1,43 @@
+databaseChangeLog:
+  - changeSet:
+      id: 28
+      context: developer
+      author: Andrew May
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: SELECT COUNT(*) FROM processo_documento
+      changes:
+        - loadData:
+            columns:
+              - column:
+                  name: id
+                  type: numeric
+              - column:
+                  name: data_juntada
+                  type: date
+              - column:
+                  name: descricao
+                  type: string
+              - column:
+                  name: documento_html
+                  type: string
+              - column:
+                  name: id_documento_sistema_legado
+                  type: string
+              - column:
+                  name: nomeuserinclusao
+                  type: string
+              - column:
+                  name: ativo
+                  type: boolean
+              - column:
+                  name: id_processo
+                  type: numeric
+              - column:
+                  name: extensao
+                  type: string
+            encoding: UTF-8
+            file: ./db/changelog/seeds/csv/processo-documentos.csv
+            tableName: processo_documento

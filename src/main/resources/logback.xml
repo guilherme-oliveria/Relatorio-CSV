@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <jmxConfigurator/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%-30(%d{HH:mm:ss.SSS} [%thread]) %-5level %logger{32} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <property resource="version.properties"/>
+
+    <appender name="GRAYLOG_UDP" class="com.github.pukkaone.gelf.logback.GelfAppender">
+        <graylogHost>udp:graylog.tjro.net</graylogHost>
+        <graylogPort>12201</graylogPort>
+        <levelIncluded>true</levelIncluded>
+        <locationIncluded>true</locationIncluded>
+        <loggerIncluded>true</loggerIncluded>
+        <markerIncluded>false</markerIncluded>
+        <mdcIncluded>true</mdcIncluded>
+        <threadIncluded>true</threadIncluded>
+        <facility>gelf-java</facility>
+        <additionalField>application_name=${TJRO_APPNAME}</additionalField>
+        <additionalField>application_tag=${TJRO_APPTAG}</additionalField>
+        <additionalField>environment=${TJRO_ENV}</additionalField>
+        <additionalField>version=${major}.${minor}.${patch}</additionalField>
+    </appender>
+
+    <if condition='isDefined("TJRO_APPNAME")'>
+        <then>
+            <logger name="events" level="INFO" additivity="false">
+                <appender-ref ref="GRAYLOG_UDP"/>
+                <appender-ref ref="STDOUT"/>
+            </logger>
+            <logger name="br.jus.tjro.gabinete" level="INFO" additivity="false">
+                <appender-ref ref="GRAYLOG_UDP"/>
+                <appender-ref ref="STDOUT"/>
+            </logger>
+            <root>
+                <appender-ref ref="GRAYLOG_UDP"/>
+                <appender-ref ref="STDOUT"/>
+            </root>
+        </then>
+        <else>
+            <root>
+                <appender-ref ref="STDOUT"/>
+            </root>
+        </else>
+    </if>
+
+</configuration>

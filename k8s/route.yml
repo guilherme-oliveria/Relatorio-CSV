@@ -1,0 +1,26 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  annotations:
+    openshift.io/host.generated: 'true'
+    haproxy.router.openshift.io/timeout: 600000ms
+  name: #TJRO_APPTAG
+  namespace: #NAME_SPACE
+spec:
+  host: #TJRO_HOSTNAME
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: edge
+  to:
+    kind: Service
+    name: #TJRO_APPTAG
+    weight: 100
+  wildcardPolicy: None
+status:
+  ingress:
+    - conditions:
+      - status: 'True'
+        type: Admitted
+      host: #TJRO_HOSTNAME
+      routerName: router
+      wildcardPolicy: None

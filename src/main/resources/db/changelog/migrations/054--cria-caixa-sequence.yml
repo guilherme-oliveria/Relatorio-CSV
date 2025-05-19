@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: 54
+      author: liquibase
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - sequenceExists:
+                sequenceName: sequence_caixa
+      changes:
+        - createSequence:
+            incrementBy: 1
+            minValue: 1
+            sequenceName: sequence_caixa
+            startValue: 1

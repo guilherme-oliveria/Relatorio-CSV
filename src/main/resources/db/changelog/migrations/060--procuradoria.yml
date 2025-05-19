@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - changeSet:
+      id: 60
+      author: Guilherme oliveira
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - sequenceExists:
+                sequenceName: SEQ_PROCURADORIA
+      changes:
+        - createSequence:
+            incrementBy: 1
+            minValue: 1
+            sequenceName: SEQ_PROCURADORIA
+            startValue: 1
+        - createTable:
+            tableName: procuradoria
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  defaultValue:
+                    defaultNumericValue:
+                      sequenceName: SEQ_PROCURADORIA
+              - column:
+                  name: id_legado
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: descricao
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true

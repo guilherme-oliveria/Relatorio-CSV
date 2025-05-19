@@ -1,0 +1,152 @@
+databaseChangeLog:
+  - changeSet:
+      id: 7
+      author: Jônatas
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: ESTADO
+      changes:
+        - createTable:
+            tableName: ESTADO
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_estado
+              - column:
+                  name: uf
+                  type: varchar(2)
+                  constraints:
+                    unique: true
+              - column:
+                  name: descricao
+                  type: varchar(255)
+                  constraints:
+                    unique: true
+        - createSequence:
+            incrementBy: 1
+            minValue: 1
+            sequenceName: SEQ_ESTADO
+            startValue: 1
+        - createTable:
+            tableName: ENDERECO_MUNICIPIO
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_endereco_municipio
+              - column:
+                  name: descricao
+                  type: varchar(50)
+              - column:
+                  name: id_estado
+                  type: BIGINT
+        - createSequence:
+            incrementBy: 1
+            minValue: 1
+            sequenceName: SEQ_ENDERECO_MUNICIPIO
+            startValue: 1
+        - createTable:
+            tableName: ENDERECO_CEP
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_endereco_cep
+              - column:
+                  name: numero
+                  type: varchar(9)
+                  constraints:
+                    unique: true
+              - column:
+                  name: logradouro
+                  type: varchar(200)
+              - column:
+                  name: bairro
+                  type: varchar(200)
+              - column:
+                  name: complemento
+                  type: varchar(200)
+              - column:
+                  name: id_municipio
+                  type: BIGINT
+        - createSequence:
+            incrementBy: 1
+            minValue: 1
+            sequenceName: SEQ_ENDERECO_CEP
+            startValue: 1
+        - addForeignKeyConstraint:
+            baseColumnNames: id_municipio
+            baseTableName: ENDERECO_CEP
+            constraintName: FK_ENDERECO_CEP_ENDERECO_MUN
+            deferreable: true
+            initiallyDeferred: true
+            onDelete: No Action
+            onUpdate: No Action
+            referencedColumnNames: id
+            referencedTableName: ENDERECO_MUNICIPIO
+        - addUniqueConstraint:
+            columnNames: descricao, id_estado
+            constraintName: UK_ENDERECO_MUNICIPIO_ID_ESTAD
+            deferrable: true
+            disabled: true
+            initiallyDeferred: true
+            tableName: ENDERECO_MUNICIPIO
+        - createTable:
+            tableName: ENDERECO
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_endereco
+              - column:
+                  name: id_endereco_legado
+                  type: BIGINT
+                  constraints:
+                    unique: true
+              - column:
+                  name: logradouro
+                  type: varchar(255)
+              - column:
+                  name: numero
+                  type: varchar(255)
+              - column:
+                  name: complemento
+                  type: varchar(100)
+              - column:
+                  name: bairro
+                  type: varchar(100)
+                  constraints:
+                    - nullable: false
+              - column:
+                  name: id_cep
+                  type: BIGINT
+        - createSequence:
+            incrementBy: 1
+            minValue: 1
+            sequenceName: SEQ_ENDERECO
+            startValue: 1
+        - addForeignKeyConstraint:
+            baseColumnNames: id_cep
+            baseTableName: ENDERECO
+            constraintName: FK_ENDERECO_ENDERECO_CEP
+            deferreable: true
+            initiallyDeferred: true
+            onDelete: No Action
+            onUpdate: No Action
+            referencedColumnNames: id
+            referencedTableName: ENDERECO_CEP

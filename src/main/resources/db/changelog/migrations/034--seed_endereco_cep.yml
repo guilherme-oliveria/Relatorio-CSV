@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: 34
+      context: developer
+      author: Jônatas
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: SELECT COUNT(*) FROM endereco_cep
+      changes:
+        - loadData:
+            catalogName: endereco-cep-seed
+            columns:
+              - column:
+                  name: id
+                  type: numeric
+              - column:
+                  name: id_municipio
+                  type: numeric
+            encoding: UTF-8
+            file: ./db/changelog/seeds/csv/endereco_cep.csv
+            schemaName: public
+            tableName: endereco_cep

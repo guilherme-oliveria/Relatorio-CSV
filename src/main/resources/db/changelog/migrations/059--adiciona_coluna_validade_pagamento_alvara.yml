@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - include:
+      file: ./db/changelog/types.yml
+  - changeSet:
+      id: 59
+      author: Janderson B
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - columnExists:
+                tableName: PAGAMENTO_ALVARA
+                columnName: validade
+      changes:
+        - addColumn:
+            tableName: PAGAMENTO_ALVARA
+            columns:
+              - column:
+                  name: validade
+                  type: BIGINT

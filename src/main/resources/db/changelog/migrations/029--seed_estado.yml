@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: 29
+      author: Andrew May
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: SELECT COUNT(*) FROM estado
+      changes:
+        - loadData:
+            columns:
+              - column:
+                  name: id
+                  type: numeric
+              - column:
+                  name: uf
+                  type: string
+              - column:
+                  name: descricao
+                  type: string
+            encoding: UTF-8
+            file: ./db/changelog/seeds/csv/estado.csv
+            tableName: estado
